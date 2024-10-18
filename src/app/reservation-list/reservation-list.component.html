@@ -1,1 +1,18 @@
-<p>reservation-list works!</p>
+<h2>Reservation List</h2>
+
+@if (reservations.length) {
+<ul>
+  @for(reservation of reservations;track reservation.guestName ){
+  <li>
+    Guest: {{ reservation.guestName }} <br />
+    Check-In: {{ reservation.checkInDate }} <br />
+    Check-Out: {{ reservation.checkOutDate }} <br />
+    Room Number: {{ reservation.roomNumber }} <br />
+    <button (click)="deleteReservation(reservation.id)">Delete Reservation</button>
+  </li>
+  }
+</ul>
+
+}@else {
+<p>No reservation available.</p>
+}

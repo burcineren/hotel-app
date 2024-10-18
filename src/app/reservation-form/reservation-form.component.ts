@@ -3,6 +3,7 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { FormBuilder, FormGroup, Validator } from '@angular/forms';
 import { ReservationService } from '../reservation/reservation.service';
 import { Reservation } from '../models/reservation';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-reservation-form',
   standalone: true,
@@ -18,6 +19,7 @@ export class ReservationFormComponent implements OnInit {
 
   private formBuilder = inject(FormBuilder);
   private reservationService = inject(ReservationService);
+  private router = inject(Router);
 
   reservationForm: FormGroup = new FormGroup({
     // checkInDate:new FormControl(''),
@@ -41,6 +43,8 @@ export class ReservationFormComponent implements OnInit {
 
       let reservation: Reservation = this.reservationForm.value;
       this.reservationService.addReservation(reservation);
+      this.router.navigate(['/list']);
     }
   }
+ 
 }
