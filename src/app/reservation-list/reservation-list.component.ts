@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { Reservation } from '../models/reservation';
+import { ReservationService } from '../reservation/reservation.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reservation-list',
@@ -7,6 +10,17 @@ import { Component } from '@angular/core';
   templateUrl: './reservation-list.component.html',
   styleUrl: './reservation-list.component.scss'
 })
-export class ReservationListComponent {
+export class ReservationListComponent implements OnInit  {
 
+  reservations: Reservation[] = [];
+  private reservationService = inject(ReservationService);
+  private router = inject(Router);
+
+
+  ngOnInit(): void {
+    this.reservations = this.reservationService.getReservations();
+  }
+  deleteReservation(id: string) {
+    this.reservationService.deleteReservation(id);
+  }
 }
