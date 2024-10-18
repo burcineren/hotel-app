@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormControl, FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormBuilder, FormGroup, Validator } from '@angular/forms';
+import { ReservationService } from '../reservation/reservation.service';
+import { Reservation } from '../models/reservation';
 @Component({
   selector: 'app-reservation-form',
   standalone: true,
@@ -15,7 +17,9 @@ export class ReservationFormComponent implements OnInit {
   submitted = false;
 
   private formBuilder = inject(FormBuilder);
-  reservationForm : FormGroup = new FormGroup({
+  private reservationService = inject(ReservationService);
+
+  reservationForm: FormGroup = new FormGroup({
     // checkInDate:new FormControl(''),
     // checkOutDate: new FormControl(''),
     // guestName: new FormControl(''),
@@ -32,9 +36,11 @@ export class ReservationFormComponent implements OnInit {
       roomNumber: ['', Validators.required],
     });
   }
-  onSubmit(){
-    if(this.reservationForm.valid){
-      console.log("valid");
+  onSubmit() {
+    if (this.reservationForm.valid) {
+
+      let reservation: Reservation = this.reservationForm.value;
+      this.reservationService.addReservation(reservation);
     }
   }
 }
