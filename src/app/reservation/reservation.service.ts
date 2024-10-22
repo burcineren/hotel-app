@@ -12,7 +12,6 @@ export class ReservationService {
     let savedReservations = localStorage.getItem('reservations');
     this.reservations = savedReservations ? JSON.parse(savedReservations) : [];
   }
-
   //CRUD
 
   getReservations(): Reservation[] {

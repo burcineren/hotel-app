@@ -1,54 +1,60 @@
-<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label>Check-In Date:</label>
-    <input type="date" formControlName="checkInDate" />
-    <div class="invalid-feedback">
-      @if (reservationForm.get('checkInDate')?.invalid &&
-      reservationForm.get('checkInDate')?.touched) {
-      <div>Check In Date is required</div>
-      }
-    </div>
-  </div>
-  <div>
-    <label>Check-Out Date:</label>
-    <input type="date" formControlName="checkOutDate" />
-    <div class="invalid-feedback">
-      @if (reservationForm.get('checkOutDate')?.invalid &&
-      reservationForm.get('checkOutDate')?.touched) {
-      <div>Check Out Date is required</div>
-      }
-    </div>
-  </div>
-  <div>
-    <label>Guest Name:</label>
-    <input type="text" formControlName="guestName" />
-    <div class="invalid-feedback">
-      @if (reservationForm.get('guestName')?.invalid &&
-      reservationForm.get('guestName')?.touched) {
-      <div>Guest Name is required</div>
-      }
-    </div>
-  </div>
-  <div>
-    <label>Guest Email:</label>
-    <input type="email" formControlName="guestEmail" />
-    <div class="invalid-feedback">
-      @if (reservationForm.get('guestEmail')?.invalid &&
-      reservationForm.get('guestEmail')?.touched) {
-      <div>Guest Email is required</div>
-      }
-    </div>
-  </div>
+<app-home></app-home>
 
-  <div>
-    <label>Room Number:</label>
-    <input type="number" formControlName="roomNumber" />
-    <div class="invalid-feedback">
-      @if (reservationForm.get('roomNumber')?.invalid &&
-      reservationForm.get('roomNumber')?.touched) {
-      <div>Room Number is required</div>
-      }
+
+<h3 class="mt-5 mb-3 lead"> Create a new reservation</h3>
+  <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+   <div class="row mb-3">
+    <div class="col">
+      <label>Check-In Date:</label>
+      <input type="date" class="form-control" formControlName="checkInDate" />
+      <div class="invalid-feedback">
+        @if (reservationForm.get('checkInDate')?.invalid &&
+        reservationForm.get('checkInDate')?.touched) {
+        <div class="alert alert-danger" role="alert">Check In Date is required</div>
+        }
+      </div>
     </div>
-  </div>
-  <button type="submit" [disabled]="reservationForm.invalid">Submit</button>
-</form>
+    <div class="col">
+      <label>Check-Out Date:</label>
+      <input type="date"  class="form-control" formControlName="checkOutDate" />
+      <div class="invalid-feedback">
+        @if (reservationForm.get('checkOutDate')?.invalid &&
+        reservationForm.get('checkOutDate')?.touched) {
+        <div  class="alert alert-danger" role="alert">Check Out Date is required</div>
+        }
+      </div>
+    </div>
+   </div>
+    <div class="mb-3">
+      <label>Guest Name:</label>
+      <input type="text"  class="form-control" formControlName="guestName" />
+      <div class="invalid-feedback">
+        @if (reservationForm.get('guestName')?.invalid &&
+        reservationForm.get('guestName')?.touched) {
+        <div class="alert alert-danger" role="alert">Guest Name is required</div>
+        }
+      </div>
+    </div>
+    <div class="mb-3">
+      <label>Guest Email:</label>
+      <input type="email"  class="form-control" formControlName="guestEmail" />
+      <div class="invalid-feedback">
+        @if (reservationForm.get('guestEmail')?.invalid &&
+        reservationForm.get('guestEmail')?.touched) {
+        <div class="alert alert-danger" role="alert">Guest Email is required</div>
+        }
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label>Room Number:</label>
+      <input type="number" class="form-control" formControlName="roomNumber" />
+      <div class="invalid-feedback">
+        @if (reservationForm.get('roomNumber')?.invalid &&
+        reservationForm.get('roomNumber')?.touched) {
+        <div class="alert alert-danger" role="alert">Room Number is required</div>
+        }
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="reservationForm.invalid">Submit</button>
+  </form>
