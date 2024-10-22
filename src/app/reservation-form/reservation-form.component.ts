@@ -4,12 +4,14 @@ import { FormBuilder, FormGroup, Validator } from '@angular/forms';
 import { ReservationService } from '../reservation/reservation.service';
 import { Reservation } from '../models/reservation';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HomeComponent } from '../home/home.component';
 @Component({
   selector: 'app-reservation-form',
   standalone: true,
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HomeComponent
   ],
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.scss'
@@ -50,7 +52,7 @@ export class ReservationFormComponent implements OnInit {
   onSubmit() {
     if (this.reservationForm.valid) {
       let reservation: Reservation = this.reservationForm.value;
-      // this.reservationService.addReservation(reservation);
+      this.reservationService.addReservation(reservation);
 
       let id = this.activatedRoute.snapshot.paramMap.get('id')
       if (id) {
@@ -61,7 +63,6 @@ export class ReservationFormComponent implements OnInit {
         // new
         this.reservationForm.patchValue(reservation)
       }
-
       this.router.navigate(['/list']);
     }
   }
