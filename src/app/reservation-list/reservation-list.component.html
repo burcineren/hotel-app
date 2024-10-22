@@ -1,18 +1,30 @@
-<h2>Reservation List</h2>
+<h2 class="mt-5 mb-3">Reservation List</h2>
 @if (reservations.length) {
-<ul>
-  @for(reservation of reservations;track reservation.guestName ){
-  <li>
-    Guest: {{ reservation.guestName }} <br />
-    Check-In: {{ reservation.checkInDate }} <br />
-    Check-Out: {{ reservation.checkOutDate }} <br />
-    Room Number: {{ reservation.roomNumber }} <br />
-    <button class="btn btn-primary" (click)="deleteReservation(reservation.id)">Delete</button>
-    <button class="btn btn-primary" [routerLink]="['/edit',reservation.id]">Edit </button>
-  </li>
+<table class="table table-striped">
+    <thead>
+        <th>Guest </th>
+        <th>Check-In</th>
+        <th>Check-Out</th>
+        <th>Room Number</th>
+        <th>Actions</th>
+    </thead>
+    <tbody>
+        @for(reservation of reservations;track reservation.guestName ){
+        <tr>
+            <td> {{ reservation.guestName }} </td>
+            <td> {{ reservation.checkInDate }} </td>
+            <td> {{ reservation.checkOutDate }}</td>
+            <td>{{ reservation.roomNumber }}</td>
+            <td>
+                <button class="btn btn-danger mx-1" (click)="deleteReservation(reservation.id)">Delete</button>
+                <button class="btn btn-secondary" [routerLink]="['/edit',reservation.id]">Edit </button>
+            </td>
+        </tr>
   }
-</ul>
-
+    </tbody>
+</table>
 }@else {
-<p>No reservation available.</p>
-}
+    <p>No reservation available.</p>
+    }
+
+
