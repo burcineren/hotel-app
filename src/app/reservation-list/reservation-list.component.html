@@ -1,5 +1,5 @@
 <h2 class="mt-5 mb-3">Reservation List</h2>
-@if (reservations.length) {
+
 <table class="table table-striped">
     <thead>
         <th>Guest </th>
@@ -8,6 +8,7 @@
         <th>Room Number</th>
         <th>Actions</th>
     </thead>
+    @if (reservations.length) {
     <tbody>
         @for(reservation of reservations;track reservation.guestName ){
         <tr>
@@ -22,9 +23,10 @@
         </tr>
   }
     </tbody>
-</table>
 }@else {
     <p>No reservation available.</p>
     }
+</table>
+
 
 
