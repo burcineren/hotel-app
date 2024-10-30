@@ -20,44 +20,41 @@ export class ReservationService {
   getReservations(): Observable<Reservation[]> {
     // return this.reservations;
     return this.http.get<Reservation[]>(`${this.apiUrl}/reservations`).pipe(
-      tap(response => console.log('Raw API Response:', response)), 
+      tap(response => console.log('Raw API Response:', response)),
       catchError(this.handleError)
     );
   }
   getReservation(id: string): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.apiUrl}/reservation/${id}`).pipe(
+    return this.http.get<Reservation[]>(`${this.apiUrl}/reservations/${id}`).pipe(
       catchError(this.handleError)
     );
     // return this.reservations.find(r => r.id === id);
   }
-  addReservation(reservation: Reservation): void {
-    reservation.id = Date.now().toString();
-    this.reservations.push(reservation);
-    console.log(this.reservations)
-    // localStorage.setItem('reservations', JSON.stringify(this.reservations));
+  addReservation(reservation: Reservation): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/reservations`, reservation);
   }
 
   deleteReservation(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/reservations/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/reservation/${id}`);
   }
-  
-  updateReservation(id:string,updateReservation: Reservation): void {
-    let index = this.reservations.findIndex(r => r.id === id);
-    this.reservations[index] = updateReservation;
+
+  updateReservation(id: string, updateReservation: Reservation): Observable<void> {
+
+    return this.http.put<void>(`${this.apiUrl}/reservation`, updateReservation);
     // localStorage.setItem('reservations', JSON.stringify(this.reservations));
 
   }
-    // Error handling
-    private handleError(error: HttpErrorResponse) {
-      let errorMessage = 'An error occurred';
-      if (error.error instanceof ErrorEvent) {
-        // Client-side error
-        errorMessage = error.error.message;
-      } else {
-        // Backend error
-        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      }
-      console.error(errorMessage);
-      return throwError(() => errorMessage);
+  // Error handling
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'An error occurred';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Backend error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
+    console.error(errorMessage);
+    return throwError(() => errorMessage);
+  }
 }

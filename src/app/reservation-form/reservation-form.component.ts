@@ -57,10 +57,17 @@ export class ReservationFormComponent implements OnInit {
       let id = this.activatedRoute.snapshot.paramMap.get('id')
       if (id) {
         // update
-        this.reservationService.updateReservation(id, reservation)
+        console.log("there is a reservation");
+
+        this.reservationService.updateReservation(id, reservation).subscribe(() => {
+          console.log("update reservation processed")
+        })
       }
       else {
         // new
+        this.reservationService.addReservation(reservation).subscribe(() => {
+          console.log("Create reservation processed")
+        })
         this.reservationForm.patchValue(reservation)
       }
       this.router.navigate(['/list']);
