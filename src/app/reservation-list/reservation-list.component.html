@@ -1,32 +1,47 @@
 <h2 class="mt-5 mb-3">Reservation List</h2>
-
+<div class="search-area">
+  <mat-form-field class="example-form-field">
+    <mat-label>Search reservation</mat-label>
+    <input matInput type="text" />
+    <button matSuffix mat-icon-button aria-label="Clear">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
 <table class="table table-striped">
-    <thead>
-        <th>Guest </th>
-        <th>Check-In</th>
-        <th>Check-Out</th>
-        <th>Room Number</th>
-        <th>Actions</th>
-    </thead>
-    @if (reservations.length) {
-    <tbody>
-        @for(reservation of reservations;track reservation.guestName ){
-        <tr>
-            <td> {{ reservation.guestName }} </td>
-            <td> {{ reservation.checkInDate }} </td>
-            <td> {{ reservation.checkOutDate }}</td>
-            <td>{{ reservation.roomNumber }}</td>
-            <td>
-                <button class="btn btn-danger mx-1" (click)="deleteReservation(reservation.id)">Delete</button>
-                <button class="btn btn-secondary" [routerLink]="['/edit',reservation.id]">Edit </button>
-            </td>
-        </tr>
-  }
-    </tbody>
-}@else {
-    <p>No reservation available.</p>
+  <thead>
+    <th>Guest</th>
+    <th>Check-In</th>
+    <th>Check-Out</th>
+    <th>Room Number</th>
+    <th>Actions</th>
+  </thead>
+  @if (reservations.length) {
+  <tbody>
+    @for(reservation of reservations;track reservation.guestName ){
+    <tr>
+      <td>{{ reservation.guestName }}</td>
+      <td>{{ reservation.checkInDate }}</td>
+      <td>{{ reservation.checkOutDate }}</td>
+      <td>{{ reservation.roomNumber }}</td>
+      <td>
+        <button
+          class="btn btn-danger mx-1"
+          (click)="deleteReservation(reservation.id)"
+        >
+          Delete
+        </button>
+        <button
+          class="btn btn-secondary"
+          [routerLink]="['/edit', reservation.id]"
+        >
+          Edit
+        </button>
+      </td>
+    </tr>
     }
+  </tbody>
+  }@else {
+  <p>No reservation available.</p>
+  }
 </table>
-
-
-
