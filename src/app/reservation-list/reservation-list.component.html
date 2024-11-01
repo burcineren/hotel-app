@@ -2,8 +2,18 @@
 <div class="search-area">
   <mat-form-field class="example-form-field">
     <mat-label>Search reservation</mat-label>
-    <input matInput type="text" />
-    <button matSuffix mat-icon-button aria-label="Clear">
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="seachValue"
+      (keyup.enter)="searchReservation(seachValue)"
+    />
+    <button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="seachValue = ''"
+    >
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
@@ -16,9 +26,9 @@
     <th>Room Number</th>
     <th>Actions</th>
   </thead>
-  @if (reservations.length) {
+  @if (filteredReservations.length) {
   <tbody>
-    @for(reservation of reservations;track reservation.guestName ){
+    @for(reservation of filteredReservations;track reservation.guestName ){
     <tr>
       <td>{{ reservation.guestName }}</td>
       <td>{{ reservation.checkInDate }}</td>
