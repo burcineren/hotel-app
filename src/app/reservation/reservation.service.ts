@@ -35,12 +35,11 @@ export class ReservationService {
   }
 
   deleteReservation(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/reservation/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/reservations/${id}`);
   }
 
-  updateReservation(id: string, updateReservation: Reservation): Observable<void> {
-
-    return this.http.put<void>(`${this.apiUrl}/reservation`, updateReservation);
+  updateReservation(id:string, updateReservation: Reservation): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/reservations/${id}`, updateReservation);
     // localStorage.setItem('reservations', JSON.stringify(this.reservations));
 
   }
