@@ -8,18 +8,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-
+import {MatSelectModule} from '@angular/material/select';
 @Component({
   selector: 'app-reservation-list',
   standalone: true,
-  imports: [RouterModule, HttpClientModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule],
+  imports: [RouterModule, HttpClientModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule,MatSelectModule],
   templateUrl: './reservation-list.component.html',
   styleUrl: './reservation-list.component.scss'
 })
 export class ReservationListComponent implements OnInit {
 
   reservations: Reservation[] = [];
-  filteredReservations: any[] = []
+  filteredReservations: any[] = [];
+  sortOrder: String = '';
   private reservationService = inject(ReservationService);
   private router = inject(Router);
   error: string = '';
@@ -45,5 +46,16 @@ export class ReservationListComponent implements OnInit {
     this.reservationService.getReservations().subscribe(res => {
       this.filteredReservations = res.filter(res => res.guestName.toLowerCase() === value.toLowerCase());
     });
+  }
+  sortReservation(sortValue: string) {
+    this.sortOrder = sortValue;
+
+    if(this.sortOrder === "reservationLowHigh"){
+      this.filteredReservations.sort((a,b)=> a.reservation - b.reservation);
+      
+    } else if(this.sortOrder === "reservationHighLow"){
+      this.filteredReservations.sort((a,b)=> b.reservation - a.reservation);
+
+    }
   }
 }
