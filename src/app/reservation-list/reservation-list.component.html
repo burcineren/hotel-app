@@ -17,26 +17,19 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
-  <h4>Basic mat-select</h4>
-<mat-form-field>
-  <mat-label>Favorite food</mat-label>
-  <mat-select>
-    <!-- @for (food of foods; track food) { -->
-      <!-- <mat-option [value]="food.value">{{food.viewValue}}</mat-option> -->
-    <!-- } -->
-  </mat-select>
-</mat-form-field>
-
-<h4>Basic native select</h4>
-<mat-form-field>
-  <mat-label>Cars</mat-label>
-  <select matNativeControl required>
-    <option value="volvo">Volvo</option>
-    <option value="saab">Saab</option>
-    <option value="mercedes">Mercedes</option>
-    <option value="audi">Audi</option>
-  </select>
-</mat-form-field>
+  <span class="mx-2">
+    <mat-form-field>
+      <mat-label>Resevation List</mat-label>
+      <mat-select>
+        <mat-option value="reservationLowHigh"
+          >Resevation: Low to High</mat-option
+        >
+        <mat-option value="reservationHighLow"
+          >Resevation: High to Low</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </span>
 </div>
 <table class="table table-striped">
   <thead>

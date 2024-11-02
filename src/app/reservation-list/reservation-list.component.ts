@@ -46,6 +46,7 @@ export class ReservationListComponent implements OnInit {
     this.reservationService.getReservations().subscribe(res => {
       this.filteredReservations = res.filter(res => res.guestName.toLowerCase() === value.toLowerCase());
     });
+    // this.sortOrder(this.sortOrder)
   }
   sortReservation(sortValue: string) {
     this.sortOrder = sortValue;
