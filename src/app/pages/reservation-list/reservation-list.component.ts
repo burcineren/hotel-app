@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Reservation } from '../models/reservation';
-import { ReservationService } from '../reservation/reservation.service';
+import { Reservation } from '../../models/reservation';
+import { ReservationService } from '../../reservation/reservation.service';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
