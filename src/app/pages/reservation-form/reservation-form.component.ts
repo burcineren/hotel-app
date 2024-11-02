@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormBuilder, FormGroup, Validator } from '@angular/forms';
-import { ReservationService } from '../../reservation/reservation.service';
-import { Reservation } from '../../models/reservation';
+import { ReservationService } from '../../core/reservation/reservation.service';
+import { Reservation } from '../../core/reservation/reservation';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 @Component({

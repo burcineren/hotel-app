@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Reservation } from '../models/reservation';
+import { Reservation } from './reservation';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 @Injectable({
