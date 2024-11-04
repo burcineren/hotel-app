@@ -6,7 +6,8 @@
    <div class="row mb-3">
     <div class="col">
       <label>Check-In Date:</label>
-      <input type="date" class="form-control" formControlName="checkInDate" />
+      <!-- <input type="date" class="form-control" /> -->
+      <p-calendar formControlName="checkInDate" ></p-calendar>
       <div class="invalid-feedback">
         @if (reservationForm.get('checkInDate')?.invalid &&
         reservationForm.get('checkInDate')?.touched) {
@@ -16,7 +17,9 @@
     </div>
     <div class="col">
       <label>Check-Out Date:</label>
-      <input type="date"  class="form-control" formControlName="checkOutDate" />
+      <!-- <input type="date"  class="form-control" formControlName="checkOutDate" /> -->
+      <p-calendar formControlName="checkOutDate" ></p-calendar>
+
       <div class="invalid-feedback">
         @if (reservationForm.get('checkOutDate')?.invalid &&
         reservationForm.get('checkOutDate')?.touched) {

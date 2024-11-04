@@ -5,19 +5,23 @@ import { ReservationService } from '../../core/services/reservation/reservation.
 import { Reservation } from '../../core/services/reservation/reservation';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
+import { CalendarModule } from 'primeng/calendar';
 @Component({
   selector: 'app-reservation-form',
   standalone: true,
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    HomeComponent
+    HomeComponent,
+    CalendarModule
+
   ],
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.scss'
 })
 export class ReservationFormComponent implements OnInit {
   submitted = false;
+  date: Date = new Date(); 
 
   private formBuilder = inject(FormBuilder);
   private reservationService = inject(ReservationService);
