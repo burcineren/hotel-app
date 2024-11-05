@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject,ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormBuilder, FormGroup, Validator } from '@angular/forms';
 import { ReservationService } from '../../core/services/reservation/reservation.service';
@@ -6,6 +6,11 @@ import { Reservation } from '../../core/services/reservation/reservation';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { CalendarModule } from 'primeng/calendar';
+import {TuiInputModule} from '@taiga-ui/legacy';
+import {TuiInputDateModule, TuiTextfieldControllerModule,TuiInputNumberModule} from '@taiga-ui/legacy';
+import { ButtonModule } from 'primeng/button';
+
+
 @Component({
   selector: 'app-reservation-form',
   standalone: true,
@@ -13,16 +18,21 @@ import { CalendarModule } from 'primeng/calendar';
     FormsModule,
     ReactiveFormsModule,
     HomeComponent,
-    CalendarModule
-
+    CalendarModule,
+    TuiInputModule,
+    TuiInputDateModule,
+    TuiTextfieldControllerModule,
+    TuiInputNumberModule,
+    ButtonModule
   ],
   templateUrl: './reservation-form.component.html',
-  styleUrl: './reservation-form.component.scss'
+  styleUrl: './reservation-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReservationFormComponent implements OnInit {
   submitted = false;
   date: Date = new Date(); 
-
+   value = null;
   private formBuilder = inject(FormBuilder);
   private reservationService = inject(ReservationService);
   private router = inject(Router);
@@ -30,6 +40,7 @@ export class ReservationFormComponent implements OnInit {
 
   reservationForm: FormGroup = new FormGroup({
     // checkInDate:new FormControl(''),
+    
     // checkOutDate: new FormControl(''),
     // guestName: new FormControl(''),
     // guestEmail: new FormControl(''),

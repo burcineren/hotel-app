@@ -5,9 +5,12 @@
   <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
    <div class="row mb-3">
     <div class="col">
-      <label>Check-In Date:</label>
-      <!-- <input type="date" class="form-control" /> -->
-      <p-calendar formControlName="checkInDate" ></p-calendar>
+      <p>Check-In Date:</p>
+      <p-calendar 
+    [iconDisplay]="'input'" 
+    [showIcon]="true" 
+    formControlName="checkInDate"
+    inputId="icondisplay" />
       <div class="invalid-feedback">
         @if (reservationForm.get('checkInDate')?.invalid &&
         reservationForm.get('checkInDate')?.touched) {
@@ -16,9 +19,9 @@
       </div>
     </div>
     <div class="col">
-      <label>Check-Out Date:</label>
-      <!-- <input type="date"  class="form-control" formControlName="checkOutDate" /> -->
-      <p-calendar formControlName="checkOutDate" ></p-calendar>
+      <p>Check-Out Date:</p>
+      <p-calendar formControlName="checkOutDate"   [iconDisplay]="'input'" 
+      [showIcon]="true" inputId="icondisplay"></p-calendar>
 
       <div class="invalid-feedback">
         @if (reservationForm.get('checkOutDate')?.invalid &&
@@ -29,8 +32,13 @@
     </div>
    </div>
     <div class="mb-3">
-      <label>Guest Name:</label>
-      <input type="text"  class="form-control" formControlName="guestName" />
+      <tui-input formControlName="guestName">
+        Guest Name:
+        <input
+            tuiTextfieldLegacy
+            type="text"
+        />
+    </tui-input>
       <div class="invalid-feedback">
         @if (reservationForm.get('guestName')?.invalid &&
         reservationForm.get('guestName')?.touched) {
@@ -39,8 +47,18 @@
       </div>
     </div>
     <div class="mb-3">
-      <label>Guest Email:</label>
-      <input type="email"  class="form-control" formControlName="guestEmail" />
+      <p>
+      <tui-input formControlName="guestEmail">
+        Guest Email
+        <input
+        placeholder="mail@mail.com"
+            tuiTextfieldLegacy
+            type="email"
+            
+        />
+    </tui-input>
+    </p>
+    
       <div class="invalid-feedback">
         @if (reservationForm.get('guestEmail')?.invalid &&
         reservationForm.get('guestEmail')?.touched) {
@@ -50,8 +68,14 @@
     </div>
   
     <div class="mb-3">
-      <label>Room Number:</label>
-      <input type="number" class="form-control" formControlName="roomNumber" />
+      <tui-input-number
+    [tuiTextfieldLabelOutside]="true"
+    [(ngModel)]="value"
+     formControlName="roomNumber" 
+>
+    Enter room number
+    <input tuiTextfieldLegacy />
+</tui-input-number>
       <div class="invalid-feedback">
         @if (reservationForm.get('roomNumber')?.invalid &&
         reservationForm.get('roomNumber')?.touched) {
@@ -59,5 +83,5 @@
         }
       </div>
     </div>
-    <button class="btn btn-primary" type="submit" [disabled]="reservationForm.invalid">Submit</button>
+    <p-button class="btn" type="submit" [disabled]="reservationForm.invalid" label="Submit" severity="help"/>
   </form>
