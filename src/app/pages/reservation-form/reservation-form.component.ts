@@ -6,9 +6,9 @@ import { Reservation } from '../../core/services/reservation/reservation';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { CalendarModule } from 'primeng/calendar';
-import {TuiInputModule} from '@taiga-ui/legacy';
-import {TuiInputDateModule, TuiTextfieldControllerModule,TuiInputNumberModule} from '@taiga-ui/legacy';
 import { ButtonModule } from 'primeng/button';
+
+import {TuiInputDateModule, TuiTextfieldControllerModule,TuiInputNumberModule,TuiInputModule} from '@taiga-ui/legacy';
 
 
 @Component({
@@ -23,7 +23,7 @@ import { ButtonModule } from 'primeng/button';
     TuiInputDateModule,
     TuiTextfieldControllerModule,
     TuiInputNumberModule,
-    ButtonModule
+    ButtonModule,
   ],
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.scss',
