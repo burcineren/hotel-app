@@ -21,11 +21,11 @@
                     tuiOption
                     type="button"
                     (click)="open = false"
+                    [routerLink]="[item.link]"
+                    
                 >
-                    <img
-                        alt="icon"
-                        [src]="item.icon"
-                    />
+                  
+                    <i [class]="item.icon" ></i>
                     {{ item.name }}
                 </button>
             </tui-opt-group>
@@ -43,10 +43,11 @@
         </tui-data-list>
     </button>
     <span tuiNavigationLogo>
-        <tui-icon icon="@tui.home" />
+        <i class="bi bi-house"></i>
         <span tuiFade>A very very long product name</span>
         <tui-badge>Test</tui-badge>
     </span>
+    
     <button
         appearance="secondary-grayscale"
         tuiButton
@@ -55,7 +56,9 @@
         type="button"
         [tuiDropdown]="products"
     >
-        <span tuiFade>A very very long project</span>
+   
+    <i class="bi bi-list"></i>
+        <span tuiFade> A very very long project</span>
         <ng-template #products>
             <tui-data-list size="s">
                 <button
@@ -63,11 +66,7 @@
                     type="button"
                 >
                     A very very long project
-                    <tui-icon
-                        icon="@tui.check"
-                        [style.font-size.em]="1"
-                        [style.margin-left.rem]="0.5"
-                    />
+                    <i class="bi bi-check-lg"></i>
                 </button>
                 <button
                     tuiOption
@@ -81,64 +80,65 @@
     <hr />
     <button
         appearance="secondary-grayscale"
-        iconStart="@tui.plus"
+      
         tuiButton
         type="button"
     >
+        <i class="bi bi-plus-circle"></i>
         Create
     </button>
     <button
-        iconStart="@tui.bell"
         tuiIconButton
         type="button"
     >
+    <i class="bi bi-bell"></i>
         Notifications
         <tui-badge-notification />
     </button>
     <button
-        iconStart="@tui.ellipsis"
         tuiIconButton
         type="button"
     >
+    <i class="bi bi-three-dots-vertical"></i>
         More
     </button>
     <tui-avatar src="AI" />
 </header>
 <div [style.display]="'flex'">
     <aside
-        [style.height.rem]="27"
+        [style.height.rem]="47"
         [tuiNavigationAside]="expanded"
     >
         <header>
             <button
-                iconStart="@tui.home"
                 tuiAsideItem
                 type="button"
             >
+            <i class="bi bi-house"></i>
                 <span tuiFade>A very very long product name</span>
             </button>
         </header>
         <button
-            iconStart="@tui.search"
             tuiAsideItem
             type="button"
         >
+        <i class="bi bi-search"></i>
             Search
         </button>
         <a
-            iconStart="@tui.users"
             tuiAsideItem
         >
+        <i class="bi bi-people"></i>
             Groups
         </a>
         <tui-aside-group>
             <button
                 automation-id="setting"
-                iconStart="@tui.settings"
                 tuiAsideItem
                 tuiChevron
                 type="button"
             >
+            <i class="bi bi-gear"></i>
                 Settings
                 <ng-template>
                     <button
@@ -164,21 +164,20 @@
         </tui-aside-group>
         <button
             automation-id="hint"
-            iconStart="@tui.heart"
             tuiAsideItem
             type="button"
         >
+        <i class="bi bi-balloon-heart"></i>
             <span tuiFade>By default ellipsis is used but you can use fade too</span>
         </button>
         <button
-            iconEnd="@tui.chevron-right"
-            iconStart="@tui.ellipsis"
             tuiAsideItem
             tuiDropdownHover
             tuiDropdownOpen
             type="button"
             [tuiDropdown]="more"
         >
+        <i class="bi bi-chevron-right"></i>
             More
             <ng-template
                 #more
@@ -186,18 +185,18 @@
             >
                 <tui-data-list tuiDataListDropdownManager>
                     <button
-                        iconStart="@tui.pencil"
                         tuiAsideItem
                         type="button"
                     >
+                    <i class="bi bi-pencil"></i>
                         Write
                     </button>
                     <button
-                        iconStart="@tui.pie-chart"
                         tuiAsideItem
                         type="button"
                         [tuiDropdown]="submenu"
                     >
+                    <i class="bi bi-pie-chart"></i>
                         Categories
                         <ng-template #submenu>
                             <tui-data-list>
@@ -228,26 +227,26 @@
         </button>
         <hr />
         <button
-            iconStart="@tui.plus"
             tuiAsideItem
             type="button"
         >
+        <i class="bi bi-plus-circle"></i>
             Add
         </button>
         <footer>
             <button
-                iconStart="@tui.star"
                 tuiAsideItem
                 type="button"
             >
+            <i class="bi bi-star"></i>
                 Favorites
             </button>
             <button
                 tuiAsideItem
                 type="button"
-                [iconStart]="expanded ? '@tui.chevron-left' : '@tui.chevron-right'"
                 (click)="expanded = !expanded"
             >
+            <i [class]="expanded ? 'bi bi-chevron-left': 'bi bi-chevron-right'"></i>
                 {{ expanded ? 'Collapse' : 'Expand' }}
             </button>
         </footer>
@@ -258,7 +257,7 @@
             [style.position]="'sticky'"
         >
             <a routerLink=".">
-                <tui-icon icon="@tui.chevron-left" />
+                <i class="bi bi-chevron-left"></i>
                 Back
                
 
@@ -266,7 +265,8 @@
             /
             <span tuiNavigationLogo>
                 <span tuiFade>Groups</span>
-                <tui-badge iconStart="@tui.lock">
+                <tui-badge >
+                    <i class="bi bi-alarm"></i>
                     Status</tui-badge>
             </span>
             <hr />

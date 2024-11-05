@@ -68,14 +68,14 @@ export class HomeComponent {
 
   protected readonly drawer = {
       Components: [
-          {name: 'Button', icon: ICON},
-          {name: 'Input', icon: ICON},
-          {name: 'Tooltip', icon: ICON},
+          {name: 'Button', icon: 'bi bi-5-circle',link:'/list'},
+          {name: 'Input', icon: 'bi bi-5-circle',link:'/list'},
+          {name: 'Tooltip', icon: 'bi bi-5-circle',link:'/list'},
       ],
       Essentials: [
-          {name: 'Getting started', icon: ICON},
-          {name: 'Showcase', icon: ICON},
-          {name: 'Typography', icon: ICON},
+          {name: 'Getting started', icon: 'bi bi-5-circle',link:'/list'},
+          {name: 'Showcase', icon: 'bi bi-5-circle',link:'/list'},
+          {name: 'Typography', icon: 'bi bi-5-circle',link:'/list'},
       ],
   };
 }
