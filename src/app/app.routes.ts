@@ -16,6 +16,7 @@ export const routes: Routes = [
   {
     path: 'edit/:id',
     loadComponent: () => import('./pages/reservation-form/reservation-form.component').then(m => m.ReservationFormComponent)
-  }
+  },
+  { path: '**', redirectTo: '/' },
 ];
 
