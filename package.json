@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "^17.2.0",
     "@angular/router": "^17.2.0",
     "@maskito/core": "^3.2.0",
+    "@ngrx/effects": "^18.1.1",
+    "@ngrx/store": "^18.1.1",
     "@taiga-ui/addon-charts": "^4.14.0",
     "@taiga-ui/addon-commerce": "^4.14.0",
     "@taiga-ui/addon-doc": "^4.14.0",
