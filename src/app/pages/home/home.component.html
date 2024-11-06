@@ -24,7 +24,6 @@
                     [routerLink]="[item.link]"
                     
                 >
-                  
                     <i [class]="item.icon" ></i>
                     {{ item.name }}
                 </button>
@@ -305,7 +304,7 @@
             </button>
         </nav>
         <div
-            *tuiRepeatTimes="let index of 10"
+            *tuiRepeatTimes="let index of 2"
             tuiAppearance="floating"
             tuiCardLarge
             tuiHeader
