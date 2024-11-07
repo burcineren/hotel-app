@@ -8,7 +8,7 @@ import { HomeComponent } from '../home/home.component';
 import { CalendarModule } from 'primeng/calendar';
 import { ButtonModule } from 'primeng/button';
 
-import {TuiInputDateModule, TuiTextfieldControllerModule,TuiInputNumberModule,TuiInputModule} from '@taiga-ui/legacy';
+// import {TuiInputDateModule, TuiTextfieldControllerModule,TuiInputNumberModule,TuiInputModule} from '@taiga-ui/legacy';
 
 
 @Component({
@@ -19,10 +19,10 @@ import {TuiInputDateModule, TuiTextfieldControllerModule,TuiInputNumberModule,Tu
     ReactiveFormsModule,
     HomeComponent,
     CalendarModule,
-    TuiInputModule,
-    TuiInputDateModule,
-    TuiTextfieldControllerModule,
-    TuiInputNumberModule,
+    // TuiInputModule,
+    // TuiInputDateModule,
+    // TuiTextfieldControllerModule,
+    // TuiInputNumberModule,
     ButtonModule,
   ],
   templateUrl: './reservation-form.component.html',
