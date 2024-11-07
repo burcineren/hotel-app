@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { CalendarModule } from 'primeng/calendar';
 import { ButtonModule } from 'primeng/button';
+import {AddReservation} from "../../core/store/reservations/resevation.action";
+import {Store} from "@ngrx/store";
 
 // import {TuiInputDateModule, TuiTextfieldControllerModule,TuiInputNumberModule,TuiInputModule} from '@taiga-ui/legacy';
 
@@ -31,16 +33,17 @@ import { ButtonModule } from 'primeng/button';
 })
 export class ReservationFormComponent implements OnInit {
   submitted = false;
-  date: Date = new Date(); 
+  date: Date = new Date();
    value = null;
   private formBuilder = inject(FormBuilder);
   private reservationService = inject(ReservationService);
   private router = inject(Router);
+  private store = inject(Store<{reservations: Reservation[]}>);
   private activatedRoute = inject(ActivatedRoute);
 
   reservationForm: FormGroup = new FormGroup({
     // checkInDate:new FormControl(''),
-    
+
     // checkOutDate: new FormControl(''),
     // guestName: new FormControl(''),
     // guestEmail: new FormControl(''),
@@ -68,7 +71,7 @@ export class ReservationFormComponent implements OnInit {
     if (this.reservationForm.valid) {
       let reservation: Reservation = this.reservationForm.value;
       this.reservationService.addReservation(reservation);
-
+      this.store.dispatch(AddReservation({id, checkInDate, checkOutDate, guestName, guestEmail, roomNumber}))
       let id = this.activatedRoute.snapshot.paramMap.get('id')
       if (id) {
         // update

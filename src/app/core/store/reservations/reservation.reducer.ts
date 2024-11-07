@@ -3,7 +3,7 @@ import { Reservation } from "../../services/reservation/reservation";
 import { AddReservation, DeleteReservation } from "./resevation.action";
 
 
-export const initialState: ReadonlyArray<Reservation> = [];
+export const initialState: Reservation[] = [];
 
 export const ReservationReducer = createReducer(
     initialState,
