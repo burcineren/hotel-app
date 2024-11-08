@@ -32,13 +32,13 @@
     </div>
    </div>
     <div class="mb-3">
-      <tui-input formControlName="guestName">
+      <!-- <tui-input formControlName="guestName">
         Guest Name:
         <input
             tuiTextfieldLegacy
             type="text"
         />
-    </tui-input>
+    </tui-input> -->
       <div class="invalid-feedback">
         @if (reservationForm.get('guestName')?.invalid &&
         reservationForm.get('guestName')?.touched) {
@@ -48,7 +48,7 @@
     </div>
     <div class="mb-3">
       <p>
-      <tui-input formControlName="guestEmail">
+      <!-- <tui-input formControlName="guestEmail">
         Guest Email
         <input
         placeholder="mail@mail.com"
@@ -56,7 +56,7 @@
             type="email"
             
         />
-    </tui-input>
+    </tui-input> -->
     </p>
     
       <div class="invalid-feedback">
@@ -68,14 +68,14 @@
     </div>
   
     <div class="mb-3">
-      <tui-input-number
-    [tuiTextfieldLabelOutside]="true"
+      <!-- <tui-input-number
+  
     [(ngModel)]="value"
      formControlName="roomNumber" 
 >
     Enter room number
-    <input tuiTextfieldLegacy />
-</tui-input-number>
+    <input tuiTextfieldLegacy /> 
+</tui-input-number>-->
       <div class="invalid-feedback">
         @if (reservationForm.get('roomNumber')?.invalid &&
         reservationForm.get('roomNumber')?.touched) {

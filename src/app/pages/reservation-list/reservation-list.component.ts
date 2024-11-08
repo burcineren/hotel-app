@@ -9,6 +9,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+import {AddReservation, DeleteReservation} from "../../core/store/reservations/resevation.action";
+import {Store, select} from "@ngrx/store";
+import { Observable} from "rxjs";
+import {AppState} from "../../app.state";
+
 @Component({
   selector: 'app-reservation-list',
   standalone: true,
@@ -18,18 +23,31 @@ import {MatSelectModule} from '@angular/material/select';
 })
 export class ReservationListComponent implements OnInit {
 
-  reservations: Reservation[] = [];
+  reservationsItem: Reservation[] = [];
   filteredReservations: any[] = [];
   sortOrder: String = '';
   private reservationService = inject(ReservationService);
+  reservations$: Observable<Reservation[]>;
+
   private router = inject(Router);
+    // reservations$ = store.pipe(select('reservation'));
+  // private store = inject(Store<AppState>);
+  constructor(private store :Store<AppState>){
+    this.reservations$= store.pipe(select('reservation'));
+    this.reservations$.subscribe(res => console.log(res))
+  } 
+ 
+
+
   error: string = '';
   seachValue: string = '';
   ngOnInit(): void {
+
+
     this.reservationService.getReservations().subscribe({
       next: (data) => {
         console.log('Received data:', data);
-        this.reservations = data;
+        this.reservationsItem = data;
       },
       error: (error) => {
         console.error('Error:', error);
@@ -38,6 +56,8 @@ export class ReservationListComponent implements OnInit {
     });
   }
   deleteReservation(id: any) {
+
+    // this.store.dispatch(DeleteReservation({reservationId}));
     this.reservationService.deleteReservation(id).subscribe(() => {
       console.log("delete reservation successfully")
     });
@@ -53,7 +73,7 @@ export class ReservationListComponent implements OnInit {
 
     if(this.sortOrder === "reservationLowHigh"){
       this.filteredReservations.sort((a,b)=> a.reservation - b.reservation);
-      
+
     } else if(this.sortOrder === "reservationHighLow"){
       this.filteredReservations.sort((a,b)=> b.reservation - a.reservation);
 

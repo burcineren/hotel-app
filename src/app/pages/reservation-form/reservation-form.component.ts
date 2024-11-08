@@ -7,9 +7,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { CalendarModule } from 'primeng/calendar';
 import { ButtonModule } from 'primeng/button';
-
-import {TuiInputDateModule, TuiTextfieldControllerModule,TuiInputNumberModule,TuiInputModule} from '@taiga-ui/legacy';
-
+import {AddReservation} from "../../core/store/reservations/resevation.action";
+import {Store, select} from "@ngrx/store";
+import { Observable } from 'rxjs';
+import { AppState } from '../../app.state';
 
 @Component({
   selector: 'app-reservation-form',
@@ -19,10 +20,6 @@ import {TuiInputDateModule, TuiTextfieldControllerModule,TuiInputNumberModule,Tu
     ReactiveFormsModule,
     HomeComponent,
     CalendarModule,
-    TuiInputModule,
-    TuiInputDateModule,
-    TuiTextfieldControllerModule,
-    TuiInputNumberModule,
     ButtonModule,
   ],
   templateUrl: './reservation-form.component.html',
@@ -31,16 +28,21 @@ import {TuiInputDateModule, TuiTextfieldControllerModule,TuiInputNumberModule,Tu
 })
 export class ReservationFormComponent implements OnInit {
   submitted = false;
-  date: Date = new Date(); 
+  date: Date = new Date();
    value = null;
   private formBuilder = inject(FormBuilder);
   private reservationService = inject(ReservationService);
   private router = inject(Router);
+  reservations$: Observable<Reservation[]>;
+  // private store = inject(Store<{reservations: Reservation[]}>);
   private activatedRoute = inject(ActivatedRoute);
-
+  constructor(private store :Store<AppState>){
+    this.reservations$= store.pipe(select('reservation'));
+    this.reservations$.subscribe(res => console.log(res))
+  } 
   reservationForm: FormGroup = new FormGroup({
     // checkInDate:new FormControl(''),
-    
+
     // checkOutDate: new FormControl(''),
     // guestName: new FormControl(''),
     // guestEmail: new FormControl(''),
@@ -68,7 +70,7 @@ export class ReservationFormComponent implements OnInit {
     if (this.reservationForm.valid) {
       let reservation: Reservation = this.reservationForm.value;
       this.reservationService.addReservation(reservation);
-
+      // this.store.dispatch(AddReservation({id, checkInDate, checkOutDate, guestName, guestEmail, roomNumber}))
       let id = this.activatedRoute.snapshot.paramMap.get('id')
       if (id) {
         // update
@@ -80,6 +82,7 @@ export class ReservationFormComponent implements OnInit {
       }
       else {
         // new
+        this.store.dispatch(AddReservation(reservation));
         this.reservationService.addReservation(reservation).subscribe(() => {
           console.log("Create reservation processed")
         })
