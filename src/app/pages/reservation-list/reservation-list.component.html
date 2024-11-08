@@ -66,5 +66,29 @@
   </tbody>
   }@else {
   <p>No reservation available.</p>
+  } @if (reservations$ | async; as reservations) {
+  <ng-container>
+    @if (reservations.length) { }
+    <ul>
+      @for(reservation of reservations; track reservation){
+      <li>
+        {{ reservation.checkInDate }}
+        <!-- <button [disabled]="todo.completed" (click)="complete(todo)">
+              complete
+            </button> -->
+      </li>
+      }
+    </ul>
+
+    <ng-template #empty>
+      <div>No Data</div>
+    </ng-template>
+
+    <button (click)="loadReservations()">Refresh</button>
+    <!-- <button (click)="addTodo(todos.length + 1)">Add</button> -->
+    @if(isLoading$ | async){
+    <div>Loading...</div>
+    }
+  </ng-container>
   }
 </table>
