@@ -23,14 +23,22 @@ import {AppState} from "../../app.state";
 })
 export class ReservationListComponent implements OnInit {
 
-  //reservations: Reservation[] = [];
+  reservationsItem: Reservation[] = [];
   filteredReservations: any[] = [];
-  reservations$:Observable<Reservation[]>;
   sortOrder: String = '';
   private reservationService = inject(ReservationService);
+  reservations$: Observable<Reservation[]>;
+
   private router = inject(Router);
-  private store = inject(Store<AppState>);
-  reservations$ = store.pipe(select('reservation'));
+    // reservations$ = store.pipe(select('reservation'));
+  // private store = inject(Store<AppState>);
+  constructor(private store :Store<AppState>){
+    this.reservations$= store.pipe(select('reservation'));
+    this.reservations$.subscribe(res => console.log(res))
+  } 
+ 
+
+
   error: string = '';
   seachValue: string = '';
   ngOnInit(): void {
@@ -39,7 +47,7 @@ export class ReservationListComponent implements OnInit {
     this.reservationService.getReservations().subscribe({
       next: (data) => {
         console.log('Received data:', data);
-        this.reservations = data;
+        this.reservationsItem = data;
       },
       error: (error) => {
         console.error('Error:', error);
@@ -49,7 +57,7 @@ export class ReservationListComponent implements OnInit {
   }
   deleteReservation(id: any) {
 
-    this.store.dispatch(DeleteReservation({reservationId}));
+    // this.store.dispatch(DeleteReservation({reservationId}));
     this.reservationService.deleteReservation(id).subscribe(() => {
       console.log("delete reservation successfully")
     });
