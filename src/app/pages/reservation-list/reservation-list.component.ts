@@ -59,9 +59,7 @@ export class ReservationListComponent implements OnInit {
     });
   }
   deleteReservation(id: any) {
-    console.log("id:::", id)
     this.store.dispatch(DeleteReservation({ id }));
-    console.log("aaa:::", this.store.dispatch(DeleteReservation({ id })))
     // this.reservationService.deleteReservation(id).subscribe(() => {
     //   console.log("delete reservation successfully")
     // });
