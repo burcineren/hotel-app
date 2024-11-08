@@ -6,9 +6,8 @@ import {AppState} from "./app.state";
 // import {TuiRoot} from '@taiga-ui/core';
 
 @Component({
-  imports: [ StoreModule.forRoot({reservation: ReservationReducer}),
+  imports: [
     RouterOutlet,
-
   ],
   selector: 'app-root',
   standalone: true,
