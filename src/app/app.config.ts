@@ -5,13 +5,17 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideStore } from '@ngrx/store';
-import { ReservationReducer } from './core/store/reservations/reservation.reducer';
+import { ReservationService } from './core/services/reservation/reservation.service';
+import { appEffects, appStore } from './app.state';
+import { provideEffects } from '@ngrx/effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
     provideAnimationsAsync(),
-    provideStore({ reservation: ReservationReducer })  
+    provideStore(appStore),
+    provideEffects(appEffects),
+    ReservationService
   ],
 };
