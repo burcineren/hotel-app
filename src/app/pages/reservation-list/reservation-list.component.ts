@@ -8,16 +8,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import {MatSelectModule} from '@angular/material/select';
-import {AddReservation, DeleteReservation} from "../../core/store/reservations/resevation.action";
-import {Store, select} from "@ngrx/store";
-import { Observable} from "rxjs";
-import {AppState} from "../../app.state";
+import { MatSelectModule } from '@angular/material/select';
+import { AddReservation, DeleteReservation, LoadReservations } from "../../core/store/reservations/resevation.action";
+import { Store, select } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { AppState } from "../../app.state";
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-reservation-list',
   standalone: true,
-  imports: [RouterModule, HttpClientModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule,MatSelectModule],
+  imports: [RouterModule, HttpClientModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule, MatSelectModule, AsyncPipe],
   templateUrl: './reservation-list.component.html',
   styleUrl: './reservation-list.component.scss'
 })
@@ -28,15 +29,17 @@ export class ReservationListComponent implements OnInit {
   sortOrder: String = '';
   private reservationService = inject(ReservationService);
   reservations$: Observable<Reservation[]>;
+  isLoading$: Observable<boolean>;
 
   private router = inject(Router);
-    // reservations$ = store.pipe(select('reservation'));
-  // private store = inject(Store<AppState>);
-  constructor(private store :Store<AppState>){
-    this.reservations$= store.pipe(select('reservation'));
-    this.reservations$.subscribe(res => console.log(res))
-  } 
- 
+  constructor(private store: Store<AppState>) {
+    this.reservations$ = this.store.select((state) => state.reservation.reservations)
+    this.isLoading$ = this.store.select(state => state.reservation.loading);
+    this.loadReservations();
+  }
+  loadReservations() {
+    this.store.dispatch(LoadReservations());
+  }
 
 
   error: string = '';
@@ -56,11 +59,10 @@ export class ReservationListComponent implements OnInit {
     });
   }
   deleteReservation(id: any) {
-
-    // this.store.dispatch(DeleteReservation({reservationId}));
-    this.reservationService.deleteReservation(id).subscribe(() => {
-      console.log("delete reservation successfully")
-    });
+    this.store.dispatch(DeleteReservation({ id }));
+    // this.reservationService.deleteReservation(id).subscribe(() => {
+    //   console.log("delete reservation successfully")
+    // });
   }
   searchReservation(value: string) {
     this.reservationService.getReservations().subscribe(res => {
@@ -71,11 +73,11 @@ export class ReservationListComponent implements OnInit {
   sortReservation(sortValue: string) {
     this.sortOrder = sortValue;
 
-    if(this.sortOrder === "reservationLowHigh"){
-      this.filteredReservations.sort((a,b)=> a.reservation - b.reservation);
+    if (this.sortOrder === "reservationLowHigh") {
+      this.filteredReservations.sort((a, b) => a.reservation - b.reservation);
 
-    } else if(this.sortOrder === "reservationHighLow"){
-      this.filteredReservations.sort((a,b)=> b.reservation - a.reservation);
+    } else if (this.sortOrder === "reservationHighLow") {
+      this.filteredReservations.sort((a, b) => b.reservation - a.reservation);
 
     }
   }
