@@ -1,87 +1,95 @@
 <app-home></app-home>
-
-
-<h3 class="mt-5 mb-3 lead"> Create a new reservation</h3>
-  <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
-   <div class="row mb-3">
+<h3 class="mt-5 mb-3 lead">Create a new reservation</h3>
+<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+  <div class="row mb-3">
     <div class="col">
       <p>Check-In Date:</p>
-      <p-calendar 
-    [iconDisplay]="'input'" 
-    [showIcon]="true" 
-    formControlName="checkInDate"
-    inputId="icondisplay" />
+      <p-calendar
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        formControlName="checkInDate"
+        inputId="icondisplay"
+      />
       <div class="invalid-feedback">
         @if (reservationForm.get('checkInDate')?.invalid &&
         reservationForm.get('checkInDate')?.touched) {
-        <div class="alert alert-danger" role="alert">Check In Date is required</div>
+        <div class="alert alert-danger" role="alert">
+          Check In Date is required
+        </div>
         }
       </div>
     </div>
     <div class="col">
       <p>Check-Out Date:</p>
-      <p-calendar formControlName="checkOutDate"   [iconDisplay]="'input'" 
-      [showIcon]="true" inputId="icondisplay"></p-calendar>
+      <p-calendar
+        formControlName="checkOutDate"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        inputId="icondisplay"
+      ></p-calendar>
 
       <div class="invalid-feedback">
         @if (reservationForm.get('checkOutDate')?.invalid &&
         reservationForm.get('checkOutDate')?.touched) {
-        <div  class="alert alert-danger" role="alert">Check Out Date is required</div>
+        <div class="alert alert-danger" role="alert">
+          Check Out Date is required
+        </div>
         }
       </div>
     </div>
-   </div>
-    <div class="mb-3">
-      <!-- <tui-input formControlName="guestName">
-        Guest Name:
-        <input
-            tuiTextfieldLegacy
-            type="text"
-        />
-    </tui-input> -->
+  </div>
+  <div class="row">
+    <div class="mb-3 col">
+      <p-floatLabel>
+        <input pInputText id="guestName" formControlName="guestName" />
+        <label for="guestName">Guest Name</label>
+      </p-floatLabel>
       <div class="invalid-feedback">
         @if (reservationForm.get('guestName')?.invalid &&
         reservationForm.get('guestName')?.touched) {
-        <div class="alert alert-danger" role="alert">Guest Name is required</div>
+        <div class="alert alert-danger" role="alert" id="username-help">
+          Guest Name is required
+        </div>
         }
       </div>
     </div>
-    <div class="mb-3">
+    <div class="mb-3 col">
       <p>
-      <!-- <tui-input formControlName="guestEmail">
-        Guest Email
-        <input
-        placeholder="mail@mail.com"
-            tuiTextfieldLegacy
-            type="email"
-            
-        />
-    </tui-input> -->
-    </p>
-    
+        <p-floatLabel>
+          <input pInputText id="guestEmail" formControlName="guestEmail" />
+          <label for="guestEmail">Guest Email:</label>
+        </p-floatLabel>
+      </p>
+
       <div class="invalid-feedback">
         @if (reservationForm.get('guestEmail')?.invalid &&
         reservationForm.get('guestEmail')?.touched) {
-        <div class="alert alert-danger" role="alert">Guest Email is required</div>
+        <div class="alert alert-danger" role="alert">
+          Guest Email is required
+        </div>
         }
       </div>
     </div>
-  
-    <div class="mb-3">
-      <!-- <tui-input-number
-  
-    [(ngModel)]="value"
-     formControlName="roomNumber" 
->
-    Enter room number
-    <input tuiTextfieldLegacy /> 
-</tui-input-number>-->
-      <div class="invalid-feedback">
-        @if (reservationForm.get('roomNumber')?.invalid &&
-        reservationForm.get('roomNumber')?.touched) {
-        <div class="alert alert-danger" role="alert">Room Number is required</div>
-        }
-      </div>
+  </div>
+  <div class="mb-3">
+    <p-inputNumber
+      inputId="minmax"
+      formControlName="roomNumber"
+      mode="decimal"
+      [min]="0"
+    />
+    <div class="invalid-feedback">
+      @if (reservationForm.get('roomNumber')?.invalid &&
+      reservationForm.get('roomNumber')?.touched) {
+      <div class="alert alert-danger" role="alert">Room Number is required</div>
+      }
     </div>
-    <p-button class="btn" type="submit" [disabled]="reservationForm.invalid" label="Submit" severity="help"/>
-  </form>
+  </div>
+  <p-button
+    class="btn"
+    type="submit"
+    [disabled]="reservationForm.invalid"
+    label="Submit"
+    severity="help"
+  />
+</form>

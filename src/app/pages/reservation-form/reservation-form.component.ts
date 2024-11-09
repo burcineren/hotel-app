@@ -11,6 +11,9 @@ import { AddReservation, LoadReservations } from "../../core/store/reservations/
 import { Store, select } from "@ngrx/store";
 import { Observable } from 'rxjs';
 import { AppState } from '../../app.state';
+import { InputTextModule } from 'primeng/inputtext';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-reservation-form',
@@ -21,6 +24,9 @@ import { AppState } from '../../app.state';
     HomeComponent,
     CalendarModule,
     ButtonModule,
+    InputTextModule,
+    FloatLabelModule,
+    InputNumberModule
   ],
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.scss',
