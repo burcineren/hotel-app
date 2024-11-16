@@ -1,3 +1,40 @@
-
-
-    <router-outlet />
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <mat-toolbar color="primary">
+        <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="col-md-6"></div>
+        <header></header>
+      </mat-toolbar>
+      <mat-sidenav-container autosize="true">
+        <mat-sidenav
+          [mode]="isMobile ? 'over' : 'side'"
+          [opened]="isMobile ? 'false' : 'true'"
+        >
+          <sidebar></sidebar>
+        </mat-sidenav>
+        <mat-sidenav-content>
+          <router-outlet />
+          <div class="col-md-6">
+            <div class="box-area">
+              <h1>overview</h1>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <h1>Room Clean</h1>
+          </div>
+          <div class="col-md-6">
+            <div class="box-area">
+              <h1>Guest list</h1>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <h1>Quick Action</h1>
+          </div>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    </div>
+  </div>
+</div>

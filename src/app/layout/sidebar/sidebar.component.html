@@ -1,1 +1,34 @@
-<p>sidebar works!</p>
+<mat-nav-list>
+    <a mat-list-item>
+      <span class="entry" routerLink="/">
+        <mat-icon>house</mat-icon>
+        @if(!isCollapsed){
+            <span>Dashboard</span>
+        }
+      </span>
+    </a>
+    <a mat-list-item routerLink="/new">
+        <span class="entry">
+          <mat-icon>house</mat-icon>
+          @if(!isCollapsed){
+              <span>Generate Reservation</span>
+          }
+        </span>
+      </a>
+      <a  mat-list-item routerLink="/list">
+        <span class="entry">
+          <mat-icon>house</mat-icon>
+          @if(!isCollapsed){
+              <span>Reservation</span>
+          }
+        </span>
+      </a>
+      <a mat-list-item>
+        <span class="entry">
+          <mat-icon>house</mat-icon>
+          @if(!isCollapsed){
+              <span>Guest</span>
+          }
+        </span>
+      </a>
+  </mat-nav-list>
