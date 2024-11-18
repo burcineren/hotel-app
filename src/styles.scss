@@ -13,7 +13,6 @@ body {
   height: 100%;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
-
 }
 h1,
 h2,
@@ -27,12 +26,11 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Poppins", sans-serif ;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   color: #4d4b4b;
-
 }
-i{
+i {
   color: #4d4b4b;
 }
 body {
@@ -43,7 +41,6 @@ p {
   font-size: 1.5rem;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
-
 }
 .dropdown-toggle {
   font-size: 1.5rem !important;
@@ -63,11 +60,13 @@ p {
   height: auto;
 }
 .box-area {
-  background: rgb(234 234 234 / 27%) !important;
+  background: rgba(234, 234, 234, 0.27) !important;
   border-radius: 1.5rem;
   padding-bottom: 2rem;
   padding-top: 1rem;
   margin-top: 3rem;
+  margin-left: 3rem;
+  margin-right: 49px;
 }
 input.p-inputtext.p-component.p-element {
   border-radius: 3rem;
@@ -99,11 +98,11 @@ span.p-input-icon.pi.pi-search {
   padding-block: 1rem;
   padding-right: 2rem;
 }
-.setting-dropdown{
+.setting-dropdown {
   background: transparent;
   color: #4d4b4b;
   font-size: 1.5rem;
-  border: transparent !important; ;
+  border: transparent !important;
 }
 .mat-drawer-inner-container {
   background: #f5f5f5;
@@ -111,7 +110,7 @@ span.p-input-icon.pi.pi-search {
   height: 100%;
   overflow: auto;
   border-radius: 3rem;
-  margin: .5rem;
+  margin: 0.5rem;
   -webkit-overflow-scrolling: touch;
 }
 a.mat-mdc-list-item.mdc-list-item.mat-mdc-list-item-interactive.mat-mdc-list-item-single-line.mdc-list-item--with-one-line {
@@ -121,13 +120,13 @@ a.mat-mdc-list-item.mdc-list-item.mat-mdc-list-item-interactive.mat-mdc-list-ite
 .sidebar-i {
   margin: 1rem;
 }
-.mdc-list-item__primary-text{
+.mdc-list-item__primary-text {
   font-family: "Poppins", sans-serif !important;
   font-weight: 400 !important;
   font-size: 1.2rem !important;
   margin-right: 2rem !important;
 }
-.overview-box{
+.overview-box {
   background: #ffffff7d;
   border-radius: 1rem;
   padding: 2rem;
@@ -225,7 +224,6 @@ a.mat-mdc-list-item.mdc-list-item.mat-mdc-list-item-interactive.mat-mdc-list-ite
   color: #d8b826;
 }
 
-
 .card {
   border-radius: 1rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -245,19 +243,11 @@ a.mat-mdc-list-item.mdc-list-item.mat-mdc-list-item-interactive.mat-mdc-list-ite
   border-radius: 0.5rem;
 }
 
-// img {
-//   width: 24px;
-//   height: 24px;
-// }
-
 .table-responsive {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   border-radius: 10%;
 }
-
-
-
 
 .carousel-demo .image-container {
   display: flex;
@@ -270,7 +260,7 @@ a.mat-mdc-list-item.mdc-list-item.mat-mdc-list-item-interactive.mat-mdc-list-ite
   max-width: 600px;
   margin: 0 auto;
 }
-.owerview-carousel{
+.owerview-carousel {
   background: transparent !important;
   border-radius: 0 !important;
   box-shadow: none !important;
