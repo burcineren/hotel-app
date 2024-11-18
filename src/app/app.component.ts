@@ -14,6 +14,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { HeaderComponent } from './layout/header/header.component';
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { TagModule } from 'primeng/tag';
 @Component({
   imports: [
     RouterOutlet,
@@ -27,7 +30,9 @@ import { HeaderComponent } from './layout/header/header.component';
     MatSidenavModule,
     MatListModule,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    CarouselModule, ButtonModule,TagModule
+    
   ],
   selector: 'app-root',
   standalone: true,
@@ -41,10 +46,18 @@ export class AppComponent implements OnInit {
   protected expanded = false;
   protected open = false;
   protected switch = false;
+  images: { src: string; alt: string }[] = [
+    { src: 'https://via.placeholder.com/600x300?text=Slide+1', alt: 'Slide 1' },
+    { src: 'https://via.placeholder.com/600x300?text=Slide+2', alt: 'Slide 2' },
+    { src: 'https://via.placeholder.com/600x300?text=Slide+3', alt: 'Slide 3' },
+    { src: 'https://via.placeholder.com/600x300?text=Slide+4', alt: 'Slide 4' },
+    { src: 'https://via.placeholder.com/600x300?text=Slide+5', alt: 'Slide 5' },
+  ];
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   isMobile = true;
   @Input() isCollapsed = false;
+  
   ngOnInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
       if (screenSize.matches) {
