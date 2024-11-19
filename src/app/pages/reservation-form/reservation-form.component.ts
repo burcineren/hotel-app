@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy, output } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormBuilder, FormGroup, Validator } from '@angular/forms';
 import { ReservationService } from '../../core/services/reservation/reservation.service';
@@ -14,6 +14,8 @@ import { AppState } from '../../app.state';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { AtomButtonComponent } from '../../core/components/atom-button';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-reservation-form',
@@ -26,7 +28,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ButtonModule,
     InputTextModule,
     FloatLabelModule,
-    InputNumberModule
+    InputNumberModule,
+    AtomButtonComponent,
+    TranslocoPipe
   ],
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.scss',
@@ -35,6 +39,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 export class ReservationFormComponent implements OnInit {
   submitted = false;
   date: Date = new Date();
+
+  onSubmit = output();
   value = null;
   private formBuilder = inject(FormBuilder);
   private reservationService = inject(ReservationService);
@@ -77,7 +83,7 @@ export class ReservationFormComponent implements OnInit {
       })
     }
   }
-  onSubmit() {
+  oonSubmit() {
     if (this.reservationForm.valid) {
       let reservation: Reservation = this.reservationForm.value;
       this.reservationService.addReservation(reservation);

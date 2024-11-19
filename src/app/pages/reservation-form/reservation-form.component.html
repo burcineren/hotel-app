@@ -1,6 +1,6 @@
 <app-home></app-home>
 <h3 class="mt-5 mb-3 lead">Create a new reservation</h3>
-<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="reservationForm" (ngSubmit)="oonSubmit()">
   <div class="row mb-3">
     <div class="col">
       <p>Check-In Date:</p>
@@ -85,6 +85,7 @@
       }
     </div>
   </div>
+  <be-atom-button (onClick)="onSubmit.emit()">{{ 'submit' | transloco }}</be-atom-button>
   <p-button
     class="btn"
     type="submit"
