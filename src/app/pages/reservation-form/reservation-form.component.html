@@ -1,6 +1,5 @@
-<app-home></app-home>
 <h3 class="mt-5 mb-3 lead">Create a new reservation</h3>
-<form [formGroup]="reservationForm" (ngSubmit)="oonSubmit()">
+<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
   <div class="row mb-3">
     <div class="col">
       <p>Check-In Date:</p>
@@ -85,12 +84,12 @@
       }
     </div>
   </div>
-  <be-atom-button (onClick)="onSubmit.emit()">{{ 'submit' | transloco }}</be-atom-button>
-  <p-button
-    class="btn"
-    type="submit"
+
+  <be-atom-button
+    [type]="'submit'"
     [disabled]="reservationForm.invalid"
-    label="Submit"
-    severity="help"
-  />
+    (onClick)="onSubmit()"
+  >
+    {{ "submit" | transloco }}
+  </be-atom-button>
 </form>

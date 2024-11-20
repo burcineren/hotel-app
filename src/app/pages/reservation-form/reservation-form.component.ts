@@ -3,11 +3,11 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { FormBuilder, FormGroup, Validator } from '@angular/forms';
 import { ReservationService } from '../../core/services/reservation/reservation.service';
 import { Reservation } from '../../core/services/reservation/reservation';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { CalendarModule } from 'primeng/calendar';
 import { ButtonModule } from 'primeng/button';
-import { AddReservation, LoadReservations } from "../../core/store/reservations/resevation.action";
+import { AddReservation, AddReservationSuccess, LoadReservations } from "../../core/store/reservations/resevation.action";
 import { Store, select } from "@ngrx/store";
 import { Observable } from 'rxjs';
 import { AppState } from '../../app.state';
@@ -30,7 +30,9 @@ import { TranslocoPipe } from '@jsverse/transloco';
     FloatLabelModule,
     InputNumberModule,
     AtomButtonComponent,
-    TranslocoPipe
+    TranslocoPipe,
+    RouterModule
+
   ],
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.scss',
@@ -40,7 +42,7 @@ export class ReservationFormComponent implements OnInit {
   submitted = false;
   date: Date = new Date();
 
-  onSubmit = output();
+  // onSubmit = output();
   value = null;
   private formBuilder = inject(FormBuilder);
   private reservationService = inject(ReservationService);
@@ -83,11 +85,11 @@ export class ReservationFormComponent implements OnInit {
       })
     }
   }
-  oonSubmit() {
+  onSubmit() {
     if (this.reservationForm.valid) {
       let reservation: Reservation = this.reservationForm.value;
-      this.reservationService.addReservation(reservation);
       let id = this.activatedRoute.snapshot.paramMap.get('id')
+
       if (id) {
         // update
         console.log("there is a reservation");
@@ -99,10 +101,6 @@ export class ReservationFormComponent implements OnInit {
       else {
         // new
         this.store.dispatch(AddReservation({ reservation }));
-
-        // this.reservationService.addReservation(reservation).subscribe(() => {
-        //   console.log("Create reservation processed")
-        // })
         this.reservationForm.patchValue(reservation)
       }
       this.router.navigate(['/list']);
