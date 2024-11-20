@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { Reservation } from "../../services/reservation/reservation";
-import { AddReservation, AddReservationSuccess, DeleteReservation, LoadReservations, LoadReservationsFailure, LoadReservationsSuccess } from "./resevation.action";
+import { AddReservation, AddReservationFailure, AddReservationSuccess, DeleteReservation, LoadReservations, LoadReservationsFailure, LoadReservationsSuccess } from "./resevation.action";
 
 
 
@@ -22,7 +22,7 @@ export const ReservationReducer = createReducer(
 
   on(LoadReservationsFailure, (state, { error }) => ({ ...state, error, loading: false })),
 
-  on(AddReservation, (state, { reservation }) => ({ ...state, todos: [...state.reservations, reservation] })),
+  on(AddReservation, (state, { reservation }) => ({ ...state, reservations: [...state.reservations, reservation] })),
 
   on(AddReservationSuccess, (state, { reservation }) => ({
     ...state,
@@ -31,4 +31,8 @@ export const ReservationReducer = createReducer(
   })),
 
   on(DeleteReservation, (state, { id }) => ({ ...state, todos: state.reservations.filter(t => t.id !== id) })),
+  on(AddReservationFailure, (state, { error }) => ({
+    ...state,
+    error,
+  }))
 );
