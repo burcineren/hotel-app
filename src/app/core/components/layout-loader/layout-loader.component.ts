@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {AtomFullPageLoaderComponent} from "../atom-full-page-loader/atom-full-page-loader.component";
+import {LoaderService} from "../../services/loader/loader.service";
 
 @Component({
-  selector: 'app-layout-loader',
+  selector: 'be-layout-loader',
   standalone: true,
-  imports: [],
+  imports: [AtomFullPageLoaderComponent],
   templateUrl: './layout-loader.component.html',
-  styleUrl: './layout-loader.component.scss'
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutLoaderComponent {
-
+  loaderService = inject(LoaderService);
 }

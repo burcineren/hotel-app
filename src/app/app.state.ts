@@ -1,6 +1,6 @@
 import { Action, ActionReducer } from "@ngrx/store";
-import { ReservationReducer, ReservationState } from "./core/store/reservations/reservation.reducer";
-import { ReservationEffects } from "./core/store/reservations/reservation.effects";
+import { ReservationReducer, ReservationState } from "./core/stores/reservations/reservation.reducer";
+import { ReservationEffects } from "./core/stores/reservations/reservation.effects";
 export interface AppState {
   reservation: ReservationState;
 }

@@ -1,7 +1,8 @@
-import { Injectable, inject } from '@angular/core';
-import { Reservation } from './reservation';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import {Injectable, inject} from '@angular/core';
+import {Reservation} from './reservation';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable, catchError, tap, throwError} from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,12 +25,14 @@ export class ReservationService {
       catchError(this.handleError)
     );
   }
+
   getReservation(id: string): Observable<Reservation[]> {
     return this.http.get<Reservation[]>(`${this.apiUrl}/reservations/${id}`).pipe(
       catchError(this.handleError)
     );
     // return this.reservations.find(r => r.id === id);
   }
+
   addReservation(reservation: Reservation): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/reservations`, reservation);
   }
@@ -38,11 +41,12 @@ export class ReservationService {
     return this.http.delete<void>(`${this.apiUrl}/reservations/${id}`);
   }
 
-  updateReservation(id:string, updateReservation: Reservation): Observable<void> {
+  updateReservation(id: string, updateReservation: Reservation): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/reservations/${id}`, updateReservation);
     // localStorage.setItem('reservations', JSON.stringify(this.reservations));
 
   }
+
   // Error handling
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An error occurred';

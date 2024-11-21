@@ -39,9 +39,9 @@
     <th>Room Number</th>
     <th>Actions</th>
   </thead>
-  @if (filteredReservations.length) {
+  <!-- @if (filteredReservations.length) { -->
   <tbody>
-    @for(reservation of filteredReservations;track reservation.guestName ){
+    @for(reservation of reservationsItem;track reservation.guestName ){
     <tr>
       <td>{{ reservation.guestName }}</td>
       <td>{{ reservation.checkInDate }}</td>
@@ -65,9 +65,10 @@
     </tr>
     }
   </tbody>
-  }@else {
+  <!-- }@else {
   <p>No reservation available.</p>
-  } @if (reservations$ | async; as reservations) {
+  }  -->
+  @if (reservations$ | async; as reservations) {
   <ng-container>
     @if (reservations.length) { }
     <ul>

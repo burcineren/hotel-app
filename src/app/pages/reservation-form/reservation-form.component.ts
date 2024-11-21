@@ -7,7 +7,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { CalendarModule } from 'primeng/calendar';
 import { ButtonModule } from 'primeng/button';
-import { AddReservation, AddReservationSuccess, LoadReservations } from "../../core/store/reservations/resevation.action";
+import { AddReservation, AddReservationSuccess, LoadReservations } from "../../core/stores/reservations/resevation.action";
 import { Store, select } from "@ngrx/store";
 import { Observable } from 'rxjs';
 import { AppState } from '../../app.state';

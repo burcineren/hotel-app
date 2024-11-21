@@ -14,14 +14,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { HeaderComponent } from './layout/header/header.component';
+import {LayoutLoaderComponent} from "./core/components/layout-loader";
 
 @Component({
   imports: [
     RouterOutlet,
     RouterModule,
-    FormsModule,
-    RouterLink,
-    RouterLinkActive,
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
@@ -29,8 +27,7 @@ import { HeaderComponent } from './layout/header/header.component';
     MatListModule,
     SidebarComponent,
     HeaderComponent,
-  
-    
+    LayoutLoaderComponent
   ],
   selector: 'app-root',
   standalone: true,
@@ -44,14 +41,14 @@ export class AppComponent implements OnInit {
   protected expanded = false;
   protected open = false;
   protected switch = false;
- 
- 
+
+
 
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   isMobile = true;
   @Input() isCollapsed = false;
-  
+
   ngOnInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
       if (screenSize.matches) {

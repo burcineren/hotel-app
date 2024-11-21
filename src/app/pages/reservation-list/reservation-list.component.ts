@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { AddReservation, DeleteReservation, LoadReservations } from "../../core/store/reservations/resevation.action";
+import { AddReservation, DeleteReservation, LoadReservations } from "../../core/stores/reservations/resevation.action";
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { AppState } from "../../app.state";
@@ -58,7 +58,7 @@ export class ReservationListComponent implements OnInit {
       }
     });
   }
-  deleteReservation(id: any) {   
+  deleteReservation(id: any) {
     this.store.dispatch(DeleteReservation({ id }));
     // this.reservationService.deleteReservation(id).subscribe(() => {
     //   console.log("delete reservation successfully")

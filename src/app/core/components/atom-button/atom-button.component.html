@@ -1,16 +1,15 @@
 <button [type]="type()" [disabled]="disabled()" [ngClass]="computedClasses()" (click)="onClick.emit($event)">
     <ng-content select="[left-section]"></ng-content>
-  
+
     <span class="button__text">
       <ng-content></ng-content>
     </span>
-  
-    <!-- <ng-container *ngTemplateOutlet="loading() ? loaderRef : rightSectionRef"></ng-container> -->
+  <ng-container *ngTemplateOutlet="loading() ? loaderRef : rightSectionRef"></ng-container>
   </button>
   <ng-template #rightSectionRef>
     <ng-content select="[right-section]"></ng-content>
   </ng-template>
-  
+
   <ng-template #loaderRef>
     <!-- <be-atom-icon-loader classes="spin-animation"></be-atom-icon-loader> -->
   </ng-template>
