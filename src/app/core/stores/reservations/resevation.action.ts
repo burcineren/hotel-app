@@ -19,5 +19,17 @@ export const AddReservationSuccess = createAction(
 );
 
 
-export const DeleteReservation = createAction('[Reservation] Delete Reservations', props<{ id: string }>());
+export const DeleteReservation = createAction(
+  '[Reservation] Delete Reservation',
+  props<{ id: string }>()
+);
 
+export const DeleteReservationSuccess = createAction(
+  '[Reservation] Delete Reservation Success',
+  props<{ id: string }>()
+);
+
+export const DeleteReservationFailure = createAction(
+  '[Reservation] Delete Reservation Failure',
+  props<{ error: any }>()
+);
