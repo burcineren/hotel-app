@@ -5,12 +5,15 @@ import {of} from 'rxjs';
 import {
   AddReservation,
   AddReservationFailure,
-  AddReservationSuccess,
+  AddReservationSuccess, DeleteReservation,
   LoadReservations,
   LoadReservationsFailure,
-  LoadReservationsSuccess
+  LoadReservationsSuccess,
+  DeleteReservationSuccess,
+  DeleteReservationFailure
 } from "./resevation.action";
 import {ReservationService} from "../../services/reservation/reservation.service";
+
 
 @Injectable()
 export class ReservationEffects {
@@ -43,5 +46,19 @@ export class ReservationEffects {
     )
   );
 
-
+  deleteReservation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DeleteReservation),
+      mergeMap(({id}) =>
+        this.reservationService.deleteReservation(id).pipe(
+          map(() =>
+            DeleteReservationSuccess({id})
+          ),
+          catchError((error) =>
+            of(DeleteReservationFailure({error}))
+          )
+        )
+      )
+    )
+  );
 }

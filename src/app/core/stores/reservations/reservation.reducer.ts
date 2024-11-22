@@ -7,7 +7,9 @@ import {
   DeleteReservation,
   LoadReservations,
   LoadReservationsFailure,
-  LoadReservationsSuccess
+  LoadReservationsSuccess,
+  DeleteReservationSuccess,
+  DeleteReservationFailure
 } from "./resevation.action";
 
 
@@ -39,6 +41,14 @@ export const ReservationReducer = createReducer(
   })),
 
   on(DeleteReservation, (state, {id}) => ({...state, todos: state.reservations.filter(t => t.id !== id)})),
+  on(DeleteReservationSuccess, (state, {id}) => ({
+    ...state,
+    reservations: state.reservations.filter(r => r.id !== id)
+  })),
+  on(DeleteReservationFailure, (state, {error}) => ({
+    ...state,
+    error
+  })),
   on(AddReservationFailure, (state, {error}) => ({
     ...state,
     error,
