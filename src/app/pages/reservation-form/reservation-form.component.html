@@ -1,95 +1,101 @@
-<h3 class="mt-5 mb-3 lead">Create a new reservation</h3>
-<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
-  <div class="row mb-3">
-    <div class="col">
-      <p>Check-In Date:</p>
-      <p-calendar
-        [iconDisplay]="'input'"
-        [showIcon]="true"
-        formControlName="checkInDate"
-        inputId="icondisplay"
-      />
-      <div class="invalid-feedback">
-        @if (reservationForm.get('checkInDate')?.invalid &&
-        reservationForm.get('checkInDate')?.touched) {
-        <div class="alert alert-danger" role="alert">
-          Check In Date is required
-        </div>
-        }
-      </div>
-    </div>
-    <div class="col">
-      <p>Check-Out Date:</p>
-      <p-calendar
-        formControlName="checkOutDate"
-        [iconDisplay]="'input'"
-        [showIcon]="true"
-        inputId="icondisplay"
-      ></p-calendar>
+<div class="container p-5">
+  <h2 class="pb-6">Create a new reservation</h2>
+  <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="">
+    <div class="col-end-12">
+      <div class="row col-end-10 mb-3 ">
+        <div class="d-flex flex-wrap">
+          <div class="col-end-5 ">
+            <p>Check-In Date:</p>
+            <p-calendar class="reservation-form ms-8"
+                        [iconDisplay]="'input'"
+                        [showIcon]="true"
+                        formControlName="checkInDate"
+                        inputId="icondisplay"
+            />
+            <div class="invalid-feedback">
+              @if (reservationForm.get('checkInDate')?.invalid &&
+              reservationForm.get('checkInDate')?.touched) {
+                <div class="alert alert-danger" role="alert">
+                  Check In Date is required
+                </div>
+              }
+            </div>
+          </div>
+          <div class="col-end-5">
+            <p>Check-Out Date:</p>
+            <p-calendar
+              formControlName="checkOutDate"
+              class="reservation-form"
+              [iconDisplay]="'input'"
+              [showIcon]="true"
+              inputId="icondisplay"
+            ></p-calendar>
 
-      <div class="invalid-feedback">
-        @if (reservationForm.get('checkOutDate')?.invalid &&
-        reservationForm.get('checkOutDate')?.touched) {
-        <div class="alert alert-danger" role="alert">
-          Check Out Date is required
+            <div class="invalid-feedback">
+              @if (reservationForm.get('checkOutDate')?.invalid &&
+              reservationForm.get('checkOutDate')?.touched) {
+                <div class="alert alert-danger" role="alert">
+                  Check Out Date is required
+                </div>
+              }
+            </div>
+          </div>
         </div>
-        }
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="mb-3 col">
-      <p-floatLabel>
-        <input pInputText id="guestName" formControlName="guestName" />
-        <label for="guestName">Guest Name</label>
-      </p-floatLabel>
-      <div class="invalid-feedback">
-        @if (reservationForm.get('guestName')?.invalid &&
-        reservationForm.get('guestName')?.touched) {
-        <div class="alert alert-danger" role="alert" id="username-help">
-          Guest Name is required
-        </div>
-        }
-      </div>
-    </div>
-    <div class="mb-3 col">
-      <p>
-        <p-floatLabel>
-          <input pInputText id="guestEmail" formControlName="guestEmail" />
-          <label for="guestEmail">Guest Email:</label>
-        </p-floatLabel>
-      </p>
+      <div class="row col-end-10 mb-3">
+        <div class="d-flex flex-wrap">
+          <div class="col-end-5">
+            <p>Guest Name</p>
+              <input  class="reservation-form ms-8" pInputText id="guestName" formControlName="guestName"/>
+            <div class="invalid-feedback">
+              @if (reservationForm.get('guestName')?.invalid &&
+              reservationForm.get('guestName')?.touched) {
+                <div class="alert alert-danger" role="alert" id="username-help">
+                  Guest Name is required
+                </div>
+              }
+            </div>
+          </div>
+          <div class="mb-3 col-end-5">
+            <p>Guest Email</p>
+                <input pInputText id="guestEmail" formControlName="guestEmail" class="reservation-form ms-8"/>
 
-      <div class="invalid-feedback">
-        @if (reservationForm.get('guestEmail')?.invalid &&
-        reservationForm.get('guestEmail')?.touched) {
-        <div class="alert alert-danger" role="alert">
-          Guest Email is required
+            <div class="invalid-feedback">
+              @if (reservationForm.get('guestEmail')?.invalid &&
+              reservationForm.get('guestEmail')?.touched) {
+                <div class="alert alert-danger" role="alert">
+                  Guest Email is required
+                </div>
+              }
+            </div>
+          </div>
         </div>
-        }
       </div>
-    </div>
-  </div>
-  <div class="mb-3">
-    <p-inputNumber
-      inputId="minmax"
-      formControlName="roomNumber"
-      mode="decimal"
-      [min]="0"
-    />
-    <div class="invalid-feedback">
-      @if (reservationForm.get('roomNumber')?.invalid &&
-      reservationForm.get('roomNumber')?.touched) {
-      <div class="alert alert-danger" role="alert">Room Number is required</div>
-      }
-    </div>
-  </div>
 
-  <be-atom-button
-    [type]="'submit'"
-    [disabled]="reservationForm.invalid"
-    (onClick)="onSubmit()"
-  >
-    {{ "submit" | transloco }}
-  </be-atom-button>
-</form>
+      <div class="mb-3 col-end-5">
+        <p-inputNumber
+          inputId="minmax"
+          formControlName="roomNumber"
+          mode="decimal"
+          [min]="0"
+        />
+        <div class="invalid-feedback">
+          @if (reservationForm.get('roomNumber')?.invalid &&
+          reservationForm.get('roomNumber')?.touched) {
+            <div class="alert alert-danger" role="alert">Room Number is required</div>
+          }
+        </div>
+      </div>
+
+    </div>
+    <be-atom-button
+      [type]="'submit'"
+      [disabled]="reservationForm.invalid"
+      (onClick)="onSubmit()"
+    >
+      {{ "submit" | transloco }}
+    </be-atom-button>
+  </form>
+
+</div>
+
