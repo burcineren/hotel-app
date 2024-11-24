@@ -1,8 +1,14 @@
-import {computed, inject, Injectable, signal} from '@angular/core';
-import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
-import {toSignal} from '@angular/core/rxjs-interop';
-import {filter, map, merge, Observable} from 'rxjs';
-import {Actions, ofType} from "@ngrx/effects";
+import { computed, inject, Injectable, signal } from '@angular/core';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+} from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { filter, map, merge } from 'rxjs';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Injectable({
   providedIn: 'root',
@@ -11,38 +17,24 @@ export class LoaderService {
   private router = inject(Router);
   private actions$ = inject(Actions);
 
-  private loader = signal(false);
+  private loader = signal(false); // Manual loader state
 
-  layoutLoading = computed(() => this.routerLoading() || this.actionsLoading() || this.loader());
+  layoutLoading = computed(
+    () => this.routerLoading() || this.actionsLoading() || this.loader()
+  );
 
-  ActionsToListen = signal([]);
+  ActionsToListen = signal<string[]>([]); // List of actions to listen for loading
 
-  private actionsLoading(): Observable<boolean> {
-    const actionsToListen = this.ActionsToListen();
-
-    const dispatched$ = this.actions$.pipe(
-      ofType(...actionsToListen),
-      map(() => true),
-    );
-
-    const canceled$ = this.actions$.pipe(
-      ofType(...actionsToListen),
-      map(() => false),
-    );
-
-    const errored$ = this.actions$.pipe(
-      ofType(...actionsToListen),
-      map(() => false),
-    );
-
-    const successful$ = this.actions$.pipe(
-      ofType(...actionsToListen),
-      map(() => false),
-    );
-
-    return merge(dispatched$, canceled$, errored$, successful$);
-  }
-
+  private actionsLoading = toSignal(
+    this.actions$.pipe(
+      filter((action) =>
+        this.ActionsToListen().includes(action.type)
+      ),
+      map((action) =>
+        action.type.endsWith('Request') ? true : action.type.endsWith('Success') || action.type.endsWith('Failure') ? false : null
+      )
+    )
+  );
 
   private routerLoading = toSignal(
     this.router.events.pipe(
@@ -51,17 +43,17 @@ export class LoaderService {
           event instanceof NavigationStart ||
           event instanceof NavigationEnd ||
           event instanceof NavigationCancel ||
-          event instanceof NavigationError,
+          event instanceof NavigationError
       ),
-      map((event) => event instanceof NavigationStart),
-    ),
+      map((event) => event instanceof NavigationStart)
+    )
   );
-
-  hideLoader() {
-    this.loader.set(false);
-  }
 
   showLoader() {
     this.loader.set(true);
+  }
+
+  hideLoader() {
+    this.loader.set(false);
   }
 }
