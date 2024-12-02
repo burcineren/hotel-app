@@ -16,6 +16,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { AtomButtonComponent } from '../../core/components/atom-button';
 import { TranslocoPipe } from '@jsverse/transloco';
+import { AtomInputComponent } from '../../core/components/atom-input/atom-input.component';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-reservation-form',
@@ -31,8 +33,9 @@ import { TranslocoPipe } from '@jsverse/transloco';
     InputNumberModule,
     AtomButtonComponent,
     TranslocoPipe,
-    RouterModule
-
+    RouterModule,
+    AtomInputComponent,
+    NgClass
   ],
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.scss',

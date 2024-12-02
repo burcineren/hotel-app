@@ -1,1 +1,21 @@
-<p>atom-input works!</p>
+
+
+  <div class="atom-input-container">
+    <input
+      [class]="computedClasses()"
+      [id]="id"
+      [type]="type"
+      [formControlName]="formControlName"
+      [disabled]="disabled"
+      [placeholder]="placeholder"
+    />
+    <ng-container *ngTemplateOutlet="loading ? loaderRef : rightSectionRef"></ng-container>
+  
+    <ng-template #rightSectionRef>
+      <ng-content select="[right-section]"></ng-content>
+    </ng-template>
+  
+    <ng-template #loaderRef>
+      <be-atom-icon-loader classes="spin-animation"></be-atom-icon-loader>
+    </ng-template>
+  </div>
