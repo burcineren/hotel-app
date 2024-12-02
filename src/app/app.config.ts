@@ -18,11 +18,11 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideTransloco({
       config: {
-        defaultLang: 'en', // Set the default language
-        fallbackLang: 'en', // Set the fallback language
-        prodMode: true, // Enable production mode to disable dev tools
+        defaultLang: 'en', 
+        fallbackLang: 'en', 
+        prodMode: true, 
       },
-      loader: translocoLoader, // Provide the loader for translations
+      loader: translocoLoader, 
     }),
     provideAnimationsAsync(),
     provideStore(appStore),
