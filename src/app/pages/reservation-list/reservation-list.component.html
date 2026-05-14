@@ -1,96 +1,109 @@
-<h2 class="mt-5 mb-3">Reservation List</h2>
-<div class="search-area">
-  <mat-form-field class="example-form-field">
-    <mat-label>Search reservation</mat-label>
-    <input
-      matInput
-      type="text"
-      [(ngModel)]="seachValue"
-      (keyup.enter)="searchReservation(seachValue)"
-    />
-    <button
-      matSuffix
-      mat-icon-button
-      aria-label="Clear"
-      (click)="seachValue = ''"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
-  <span class="mx-2">
-    <mat-form-field>
-      <mat-label>Resevation List</mat-label>
-      <mat-select>
-        <mat-option value="reservationLowHigh"
-          >Resevation: Low to High</mat-option
-        >
-        <mat-option value="reservationHighLow"
-          >Resevation: High to Low</mat-option
-        >
-      </mat-select>
-    </mat-form-field>
-  </span>
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Reservations</h1>
+      <p class="page-subtitle">Manage all hotel reservations</p>
+    </div>
+    <a class="btn-primary-action" routerLink="/new">
+      <i class="bi bi-plus-lg"></i>
+      New Reservation
+    </a>
+  </div>
+
+  <div class="list-card">
+    <div class="list-toolbar">
+      <div class="search-wrap">
+        <i class="bi bi-search search-icon-sm"></i>
+        <input
+          type="text"
+          class="table-search"
+          placeholder="Search by guest name…"
+          [(ngModel)]="searchValue"
+        />
+        @if (searchValue) {
+          <button class="clear-btn" (click)="searchValue = ''">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        }
+      </div>
+    </div>
+
+    @if (isLoading$ | async) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading reservations…</p>
+      </div>
+    }
+
+    @if (error$ | async; as error) {
+      <div class="error-banner">
+        <i class="bi bi-exclamation-triangle"></i>
+        {{ error }}
+      </div>
+    }
+
+    @if (reservations$ | async; as reservations) {
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Guest</th>
+              <th>Email</th>
+              <th>Check-In</th>
+              <th>Check-Out</th>
+              <th>Room</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (r of reservations; track r.id) {
+              @if (!searchValue || r.guestName.toLowerCase().includes(searchValue.toLowerCase())) {
+                <tr>
+                  <td>
+                    <div class="guest-cell">
+                      <div class="guest-avatar">{{ r.guestName[0] }}</div>
+                      <span>{{ r.guestName }}</span>
+                    </div>
+                  </td>
+                  <td class="text-secondary-cell">{{ r.guestEmail }}</td>
+                  <td>
+                    <div class="date-cell">
+                      <i class="bi bi-calendar3"></i>
+                      {{ r.checkInDate | date: 'dd MMM yyyy' }}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="date-cell">
+                      <i class="bi bi-calendar3"></i>
+                      {{ r.checkOutDate | date: 'dd MMM yyyy' }}
+                    </div>
+                  </td>
+                  <td><span class="room-badge">#{{ r.roomNumber }}</span></td>
+                  <td>
+                    <div class="action-cell">
+                      <a class="action-btn-edit" [routerLink]="['/edit', r.id]" aria-label="Edit">
+                        <i class="bi bi-pencil"></i>
+                      </a>
+                      <button class="action-btn-delete" (click)="deleteReservation(r.id)" aria-label="Delete">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            } @empty {
+              <tr>
+                <td colspan="6">
+                  <div class="empty-state">
+                    <i class="bi bi-inbox"></i>
+                    <p>No reservations found</p>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
 </div>
-<table class="table table-striped">
-  <thead>
-    <th>Guest</th>
-    <th>Check-In</th>
-    <th>Check-Out</th>
-    <th>Room Number</th>
-    <th>Actions</th>
-  </thead>
-  <!-- @if (filteredReservations.length) { -->
-  <tbody>
-    @for(reservation of reservationsItem;track reservation.guestName ){
-    <tr>
-      <td>{{ reservation.guestName }}</td>
-      <td>{{ reservation.checkInDate }}</td>
-      <td>{{ reservation.checkOutDate }}</td>
-      <td>{{ reservation.guestEmail }}</td>
-      <td>{{ reservation.roomNumber }}</td>
-      <td>
-        <button
-          class="btn btn-danger mx-1"
-          (click)="deleteReservation(reservation.id)"
-        >
-          Delete
-        </button>
-        <button
-          class="btn btn-secondary"
-          [routerLink]="['/edit', reservation.id]"
-        >
-          Edit
-        </button>
-      </td>
-    </tr>
-    }
-  </tbody>
-  <!-- }@else {
-  <p>No reservation available.</p>
-  }  -->
-  @if (reservations$ | async; as reservations) {
-  <ng-container>
-    @if (reservations.length) { }
-    <ul>
-      @for(reservation of reservations; track reservation){
-      <li>
-        {{ reservation.checkInDate }}
-        <!-- <button [disabled]="todo.completed" (click)="complete(todo)">
-              complete
-            </button> -->
-      </li>
-      }
-    </ul>
-
-    <ng-template #empty>
-      <div>No Data</div>
-    </ng-template>
-
-    <button (click)="loadReservations()">Refresh</button>
-    <!-- <button (click)="addTodo(todos.length + 1)">Add</button> -->
-    @if(isLoading$ | async){
-    <div>Loading...</div>
-    }
-  </ng-container>
-  }
-</table>

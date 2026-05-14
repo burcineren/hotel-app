@@ -1,109 +1,71 @@
-<div class="col-md-6">
-    <div class="row">
-      <div class="box-area">
-        <div class="m-4">
-          <h2>Overview</h2>
-          <div class="">
-            <div class="col-md-12 bg-white overview-box">
-              <div class="row">
-                <!-- Check-In Box -->
-                <div class="col-md-3 check-box">
-                  <div class="d-flex">
-                    <span class="check-box-i">
-                      <i class="bi bi-calendar-check text-white"></i>
-                    </span>
-                    <h5 class="mt-2">Today's Check-in</h5>
-                  </div>
-                  <div class="d-flex justify-content-between ml-1 mr-2">
-                    <p class="check-box-percentage mt-2">
-                      24% <i class="bi bi-arrow-up-right"></i>
-                    </p>
-                    <p class="check-box-number">23</p>
-                  </div>
-                  <p class="last-7-days">Last 7 Days</p>
-                </div>
+<div class="dash-card">
+  <div class="card-header-row">
+    <h3 class="card-title">Overview</h3>
+    <span class="badge-today">Today</span>
+  </div>
 
-                <!-- Check-Out Box -->
-                <div class="col-md-3 checkout-box">
-                  <div class="d-flex">
-                    <span class="checkout-box-i">
-                      <i class="bi bi-calendar-x text-white"></i>
-                    </span>
-                    <h5 class="mt-2">Today's Check-out</h5>
-                  </div>
-                  <div class="d-flex justify-content-between ml-1 mr-2">
-                    <p class="checkout-box-percentage mt-2">
-                      11% <i class="bi bi-arrow-down-right"></i>
-                    </p>
-                    <p class="checkout-box-number">21</p>
-                  </div>
-                  <p class="last-7-days">Last 7 Days</p>
-                </div>
+  <div class="stats-grid">
+    <div class="stat-card stat-green">
+      <div class="stat-icon-wrap">
+        <i class="bi bi-box-arrow-in-right"></i>
+      </div>
+      <div class="stat-body">
+        <p class="stat-label">Check-In</p>
+        <p class="stat-value">23</p>
+        <p class="stat-trend trend-up">
+          <i class="bi bi-arrow-up-short"></i> 24% vs last week
+        </p>
+      </div>
+    </div>
 
-                <!-- Rooms Available Box -->
-                <div class="col-md-3 rooms-available-box">
-                  <div class="d-flex">
-                    <span class="rooms-available-box-i">
-                      <i class="bi bi-door-open text-white"></i>
-                    </span>
-                    <h5 class="mt-2">Rooms Available</h5>
-                  </div>
-                  <div class="d-flex justify-content-between ml-1 mr-2">
-                    <p class="rooms-available-box-percentage mt-2">
-                      41% <i class="bi bi-arrow-down-right"></i>
-                    </p>
-                    <p class="rooms-available-box-number">25</p>
-                  </div>
-                  <p class="last-7-days">Last 7 Days</p>
-                </div>
+    <div class="stat-card stat-red">
+      <div class="stat-icon-wrap">
+        <i class="bi bi-box-arrow-right"></i>
+      </div>
+      <div class="stat-body">
+        <p class="stat-label">Check-Out</p>
+        <p class="stat-value">21</p>
+        <p class="stat-trend trend-down">
+          <i class="bi bi-arrow-down-short"></i> 11% vs last week
+        </p>
+      </div>
+    </div>
 
-                <!-- Rooms Reserved Box -->
-                <div class="col-md-3 rooms-reserved-box">
-                  <div class="d-flex">
-                    <span class="rooms-reserved-box-i">
-                      <i class="bi bi-calendar-event text-white"></i>
-                    </span>
-                    <h5 class="mt-2">Rooms Reserved</h5>
-                  </div>
-                  <div class="d-flex justify-content-between ml-1 mr-2">
-                    <p class="rooms-reserved-box-percentage mt-2">
-                      59% <i class="bi bi-arrow-up-right"></i>
-                    </p>
-                    <p class="rooms-reserved-box-number">12</p>
-                  </div>
-                  <p class="last-7-days">Last 7 Days</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="">
-            <div class="card owerview-carousel mt-2">
-              <p-carousel
-                [value]="images"
-                [numVisible]="3"
-                [numScroll]="3"
-                [circular]="false"
-              >
-                @for (image of images; track $index) {
-                <ng-template let-product pTemplate="item">
-                  <div class="border-1 surface-border border-round m-2 p-3">
-                    <div class="mb-3">
-                      <div class="relative mx-auto">
-                        <img
-                          src="{{ image.src }}"
-                          [alt]="image.alt"
-                          width="150"
-                          class="w-full border-round"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </ng-template>
-                }
-              </p-carousel>
-            </div>
-          </div>
-        </div>
+    <div class="stat-card stat-blue">
+      <div class="stat-icon-wrap">
+        <i class="bi bi-door-open"></i>
+      </div>
+      <div class="stat-body">
+        <p class="stat-label">Available</p>
+        <p class="stat-value">25</p>
+        <p class="stat-trend trend-down">
+          <i class="bi bi-arrow-down-short"></i> 41% vs last week
+        </p>
+      </div>
+    </div>
+
+    <div class="stat-card stat-amber">
+      <div class="stat-icon-wrap">
+        <i class="bi bi-calendar-check"></i>
+      </div>
+      <div class="stat-body">
+        <p class="stat-label">Reserved</p>
+        <p class="stat-value">12</p>
+        <p class="stat-trend trend-up">
+          <i class="bi bi-arrow-up-short"></i> 59% vs last week
+        </p>
       </div>
     </div>
   </div>
+
+  <div class="room-gallery">
+    <p class="gallery-title">Room Gallery</p>
+    <div class="gallery-grid">
+      @for (image of images; track $index) {
+        <div class="gallery-item">
+          <img [src]="image.src" [alt]="image.alt" class="gallery-img" />
+        </div>
+      }
+    </div>
+  </div>
+</div>

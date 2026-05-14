@@ -14,10 +14,8 @@ import { ButtonModule } from 'primeng/button';
 })
 export class OverviewComponent {
   images: { src: string; alt: string }[] = [
-    { src: 'assets/images/room-1.jpeg', alt: 'Slide 1' },
-    { src: 'assets/images/room-2.jpeg', alt: 'Slide 2' },
-    { src: 'assets/images/room-3.jpeg', alt: 'Slide 3' },
-    { src: 'assets/images/room-1.jpeg', alt: 'Slide 4' },
-    { src: 'assets/images/room-2.jpeg', alt: 'Slide 5' },
+    { src: 'assets/images/rooom-1.jpeg', alt: 'Room 1' },
+    { src: 'assets/images/room-2.jpeg', alt: 'Room 2' },
+    { src: 'assets/images/room-3.jpeg', alt: 'Room 3' },
   ];
 }

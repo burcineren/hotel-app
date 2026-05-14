@@ -1,101 +1,121 @@
-<div class="container p-5">
-  <h2 class="pb-6">Create a new reservation</h2>
-  <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="">
-    <div class="col-end-12">
-      <div class="row col-end-10 mb-3 ">
-        <div class="d-flex flex-wrap">
-          <div class="col-end-5 ">
-            <p>Check-In Date:</p>
-            <p-calendar class="reservation-form ms-8"
-                        [iconDisplay]="'input'"
-                        [showIcon]="true"
-                        formControlName="checkInDate"
-                        inputId="icondisplay"
-            />
-            <div class="invalid-feedback">
-              @if (reservationForm.get('checkInDate')?.invalid &&
-              reservationForm.get('checkInDate')?.touched) {
-                <div class="alert alert-danger" role="alert">
-                  Check In Date is required
-                </div>
-              }
-            </div>
-          </div>
-          <div class="col-end-5">
-            <p>Check-Out Date:</p>
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">{{ isEditMode ? 'Edit Reservation' : 'New Reservation' }}</h1>
+      <p class="page-subtitle">
+        {{ isEditMode ? 'Update the reservation details below' : 'Fill in the details to create a new reservation' }}
+      </p>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-section">
+        <h3 class="form-section-title">Stay Dates</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="checkInDate">Check-In Date</label>
             <p-calendar
-              formControlName="checkOutDate"
-              class="reservation-form"
+              class="form-calendar"
               [iconDisplay]="'input'"
               [showIcon]="true"
-              inputId="icondisplay"
-            ></p-calendar>
-
-            <div class="invalid-feedback">
-              @if (reservationForm.get('checkOutDate')?.invalid &&
-              reservationForm.get('checkOutDate')?.touched) {
-                <div class="alert alert-danger" role="alert">
-                  Check Out Date is required
-                </div>
-              }
-            </div>
+              formControlName="checkInDate"
+              inputId="checkInDate"
+              dateFormat="dd/mm/yy"
+            />
+            @if (submitted && reservationForm.get('checkInDate')?.invalid) {
+              <p class="field-error">Check-In Date is required.</p>
+            }
           </div>
-        </div>
-      </div>
-      <div class="row col-end-10 mb-3">
-        <div class="d-flex flex-wrap">
-          <div class="col-end-5">
-            <p>Guest Name</p>
-              <input  class="reservation-form ms-8" pInputText id="guestName" formControlName="guestName"/>
-            <div class="invalid-feedback">
-              @if (reservationForm.get('guestName')?.invalid &&
-              reservationForm.get('guestName')?.touched) {
-                <div class="alert alert-danger" role="alert" id="username-help">
-                  Guest Name is required
-                </div>
-              }
-            </div>
-          </div>
-          <div class="mb-3 col-end-5">
-            <p>Guest Email</p>
-                <input pInputText id="guestEmail" formControlName="guestEmail" class="reservation-form ms-8"/>
 
-            <div class="invalid-feedback">
-              @if (reservationForm.get('guestEmail')?.invalid &&
-              reservationForm.get('guestEmail')?.touched) {
-                <div class="alert alert-danger" role="alert">
-                  Guest Email is required
-                </div>
-              }
-            </div>
+          <div class="form-group">
+            <label class="form-label" for="checkOutDate">Check-Out Date</label>
+            <p-calendar
+              class="form-calendar"
+              [iconDisplay]="'input'"
+              [showIcon]="true"
+              formControlName="checkOutDate"
+              inputId="checkOutDate"
+              dateFormat="dd/mm/yy"
+            />
+            @if (submitted && reservationForm.get('checkOutDate')?.invalid) {
+              <p class="field-error">Check-Out Date is required.</p>
+            }
           </div>
         </div>
       </div>
 
-      <div class="mb-3 col-end-5">
-        <p-inputNumber
-          inputId="minmax"
-          formControlName="roomNumber"
-          mode="decimal"
-          [min]="0"
-        />
-        <div class="invalid-feedback">
-          @if (reservationForm.get('roomNumber')?.invalid &&
-          reservationForm.get('roomNumber')?.touched) {
-            <div class="alert alert-danger" role="alert">Room Number is required</div>
-          }
+      <div class="form-section">
+        <h3 class="form-section-title">Guest Information</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="guestName">Guest Name</label>
+            <input
+              class="form-input"
+              id="guestName"
+              type="text"
+              placeholder="Full name"
+              formControlName="guestName"
+            />
+            @if (submitted && reservationForm.get('guestName')?.invalid) {
+              <p class="field-error">Guest Name is required.</p>
+            }
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="guestEmail">Guest Email</label>
+            <input
+              class="form-input"
+              id="guestEmail"
+              type="email"
+              placeholder="email@example.com"
+              formControlName="guestEmail"
+            />
+            @if (submitted && reservationForm.get('guestEmail')?.invalid) {
+              <p class="field-error">
+                @if (reservationForm.get('guestEmail')?.errors?.['required']) {
+                  Guest Email is required.
+                } @else {
+                  Please enter a valid email address.
+                }
+              </p>
+            }
+          </div>
         </div>
       </div>
 
-    </div>
-    <be-atom-button
-      [type]="'submit'"
-      [disabled]="reservationForm.invalid"
-      (onClick)="onSubmit()"
-    >
-      {{ "submit" | transloco }}
-    </be-atom-button>
-  </form>
+      <div class="form-section">
+        <h3 class="form-section-title">Room Details</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="roomNumber">Room Number</label>
+            <p-inputNumber
+              class="form-input-number"
+              formControlName="roomNumber"
+              [min]="1"
+              inputId="roomNumber"
+              placeholder="101"
+            />
+            @if (submitted && reservationForm.get('roomNumber')?.invalid) {
+              <p class="field-error">Room Number is required.</p>
+            }
+          </div>
+        </div>
+      </div>
 
+      <div class="form-actions">
+        <a class="btn-cancel" routerLink="/list">Cancel</a>
+        <button
+          class="btn-submit"
+          type="submit"
+          [disabled]="submitted && reservationForm.invalid"
+        >
+          <i class="bi bi-check-lg"></i>
+          {{ isEditMode ? 'Update Reservation' : 'Create Reservation' }}
+        </button>
+      </div>
+
+    </form>
+  </div>
 </div>
-

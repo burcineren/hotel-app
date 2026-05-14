@@ -1,50 +1,39 @@
-<mat-nav-list>
-    <a mat-list-item>
-      <span class="entry" routerLink="*">
-        <i class="bi bi-house-door-fill sidebar-i"></i>
-        @if(!isCollapsed){
-            <span>Home</span>
-        }
-      </span>
+<div class="sidebar-inner">
+  <div class="sidebar-logo">
+    <a routerLink="/">
+      <div class="logo-icon">
+        <i class="bi bi-building"></i>
+      </div>
+      <span class="logo-text">LuxeStay</span>
     </a>
-    <a mat-list-item routerLink="/new">
-        <span class="entry">
-          <i class="bi bi-calendar-event-fill sidebar-i"></i>
-          @if(!isCollapsed){
-              <span>Generate Reservation</span>
-          }
-        </span>
-      </a>
-      <a  mat-list-item routerLink="/list">
-        <span class="entry">
-          <i class="bi bi-calendar-check-fill sidebar-i"></i>
-          @if(!isCollapsed){
-              <span>Reservation</span>
-          }
-        </span>
-      </a>
-      <a mat-list-item routerLink="/">
-        <span class="entry">
-          <i class="bi bi-people-fill sidebar-i"></i>
-          @if(!isCollapsed){
-              <span>Guest</span>
-          }
-        </span>
-      </a>
-      <a mat-list-item routerLink="/new">
-        <span class="entry">
-          <i class="bi bi-calendar-event-fill sidebar-i"></i>
-          @if(!isCollapsed){
-              <span>Generate Reservation</span>
-          }
-        </span>
-      </a>
-      <a  mat-list-item routerLink="/list">
-        <span class="entry">
-          <i class="bi bi-calendar-check-fill sidebar-i"></i>
-          @if(!isCollapsed){
-              <span>Reservation</span>
-          }
-        </span>
-      </a>
-  </mat-nav-list>
+  </div>
+
+  <nav class="sidebar-nav">
+    <p class="nav-section-label">Main Menu</p>
+
+    <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <i class="bi bi-grid-1x2-fill nav-icon"></i>
+      <span class="nav-text">Dashboard</span>
+    </a>
+
+    <a class="nav-link" routerLink="/new" routerLinkActive="active">
+      <i class="bi bi-plus-circle nav-icon"></i>
+      <span class="nav-text">New Reservation</span>
+    </a>
+
+    <a class="nav-link" routerLink="/list" routerLinkActive="active">
+      <i class="bi bi-table nav-icon"></i>
+      <span class="nav-text">Reservations</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <img src="/assets/images/profile.jpeg" alt="Johan Eren" class="sidebar-avatar" />
+      <div class="sidebar-user-info">
+        <span class="sidebar-user-name">Johan Eren</span>
+        <span class="sidebar-user-role">Hotel Manager</span>
+      </div>
+    </div>
+  </div>
+</div>

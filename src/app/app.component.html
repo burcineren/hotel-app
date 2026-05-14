@@ -1,28 +1,24 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <mat-toolbar color="primary">
-        <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+<div class="app-shell">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav
+      class="app-sidenav"
+      [mode]="isMobile ? 'over' : 'side'"
+      [opened]="!isMobile"
+    >
+      <sidebar></sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="top-bar">
+        <button mat-icon-button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
           <mat-icon>menu</mat-icon>
         </button>
-        <a routerLink="/">
-          <img src="assets/images/logo/hotel-logo.png" alt="" width="150"/>
-        </a>
-        <div class="col-md-6"></div>
         <header></header>
-      </mat-toolbar>
-      <mat-sidenav-container autosize="true">
-        <mat-sidenav
-          [mode]="isMobile ? 'over' : 'side'"
-          [opened]="isMobile ? 'false' : 'true'"
-        >
-          <sidebar></sidebar>
-        </mat-sidenav>
-        <mat-sidenav-content>
-          <router-outlet/>
-        </mat-sidenav-content>
-      </mat-sidenav-container>
-    </div>
-  </div>
+      </div>
+      <main class="page-body">
+        <router-outlet />
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
 <be-layout-loader></be-layout-loader>

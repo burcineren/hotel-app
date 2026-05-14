@@ -1,74 +1,55 @@
-<div class="col-md-6">
-    <div class="row">
-      <div class="box-area">
-        <div class="m-4">
-          <h2>Guest list</h2>
-
-          <div class="table-responsive">
-            <table class="table align-middle">
-              <thead>
-                <tr>
-                  <th scope="col">Room</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Task</th>
-                  <th scope="col">Assignee</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#B25</td>
-                  <td>Not Allocated</td>
-                  <td>
-                    <span class="badge bg-danger text-white">Dirty</span>
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <img
-                        src="https://via.placeholder.com/24"
-                        class="rounded-circle me-2"
-                        alt="Kristin Watson"
-                      />
-                      Kristin Watson
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>#H29</td>
-                  <td>Allocated</td>
-                  <td>
-                    <span class="badge bg-success text-white">Clean</span>
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <img
-                        src="https://via.placeholder.com/24"
-                        class="rounded-circle me-2"
-                        alt="Cameron Will"
-                      />
-                      Cameron Will
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>#B45</td>
-                  <td>Not Allocated</td>
-                  <td>
-                    <span class="badge bg-danger text-white">Dirty</span>
-                  </td>
-                  <td>None</td>
-                </tr>
-                <tr>
-                  <td>#B08</td>
-                  <td>Allocated</td>
-                  <td>
-                    <span class="badge bg-success text-white">Clean</span>
-                  </td>
-                  <td>None</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="dash-card">
+  <div class="card-header-row">
+    <h3 class="card-title">Guest List</h3>
+    <span class="view-all">View all</span>
   </div>
+
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Room</th>
+          <th>Status</th>
+          <th>Task</th>
+          <th>Assignee</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="room-badge">#B25</span></td>
+          <td><span class="status-chip status-unallocated">Unallocated</span></td>
+          <td><span class="task-chip task-dirty">Dirty</span></td>
+          <td>
+            <div class="assignee">
+              <img src="https://via.placeholder.com/26" class="assignee-avatar" alt="Kristin Watson" />
+              <span>Kristin Watson</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="room-badge">#H29</span></td>
+          <td><span class="status-chip status-allocated">Allocated</span></td>
+          <td><span class="task-chip task-clean">Clean</span></td>
+          <td>
+            <div class="assignee">
+              <img src="https://via.placeholder.com/26" class="assignee-avatar" alt="Cameron Will" />
+              <span>Cameron Will</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="room-badge">#B45</span></td>
+          <td><span class="status-chip status-unallocated">Unallocated</span></td>
+          <td><span class="task-chip task-dirty">Dirty</span></td>
+          <td><span class="text-muted-cell">—</span></td>
+        </tr>
+        <tr>
+          <td><span class="room-badge">#B08</span></td>
+          <td><span class="status-chip status-allocated">Allocated</span></td>
+          <td><span class="task-chip task-clean">Clean</span></td>
+          <td><span class="text-muted-cell">—</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
