@@ -1,46 +1,61 @@
-import {Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {catchError, map, mergeMap} from 'rxjs/operators';
-import {of} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import {
   AddReservation,
   AddReservationFailure,
-  AddReservationSuccess, DeleteReservation,
+  AddReservationSuccess,
+  DeleteReservation,
+  DeleteReservationFailure,
+  DeleteReservationSuccess,
   LoadReservations,
   LoadReservationsFailure,
   LoadReservationsSuccess,
-  DeleteReservationSuccess,
-  DeleteReservationFailure
-} from "./resevation.action";
-import {ReservationService} from "../../services/reservation/reservation.service";
-
+  UpdateReservation,
+  UpdateReservationFailure,
+  UpdateReservationSuccess,
+} from './resevation.action';
+import { ReservationService } from '../../services/reservation/reservation.service';
 
 @Injectable()
 export class ReservationEffects {
   constructor(
     private actions$: Actions,
     private reservationService: ReservationService
-  ) {
-  }
+  ) {}
 
-  loadReservation$ = createEffect(() =>
+  loadReservations$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LoadReservations),
-      mergeMap(() =>
+      switchMap(() =>
         this.reservationService.getReservations().pipe(
-          map((reservations) => LoadReservationsSuccess({reservations})),
-          catchError((error) => of(LoadReservationsFailure({error: error.message})))
+          map((reservations) => LoadReservationsSuccess({ reservations })),
+          catchError((error) => of(LoadReservationsFailure({ error: error.message })))
         )
       )
     )
   );
+
   addReservation$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AddReservation),
-      mergeMap(({reservation}) =>
+      switchMap(({ reservation }) =>
         this.reservationService.addReservation(reservation).pipe(
-          map(() => AddReservationSuccess({reservation})),
-          catchError((error) => of(AddReservationFailure({error})))
+          map(() => AddReservationSuccess({ reservation })),
+          catchError((error) => of(AddReservationFailure({ error: error.message })))
+        )
+      )
+    )
+  );
+
+  updateReservation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UpdateReservation),
+      switchMap(({ id, reservation }) =>
+        this.reservationService.updateReservation(id, reservation).pipe(
+          map(() => UpdateReservationSuccess({ id, reservation })),
+          catchError((error) => of(UpdateReservationFailure({ error: error.message })))
         )
       )
     )
@@ -49,14 +64,10 @@ export class ReservationEffects {
   deleteReservation$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DeleteReservation),
-      mergeMap(({id}) =>
+      switchMap(({ id }) =>
         this.reservationService.deleteReservation(id).pipe(
-          map(() =>
-            DeleteReservationSuccess({id})
-          ),
-          catchError((error) =>
-            of(DeleteReservationFailure({error}))
-          )
+          map(() => DeleteReservationSuccess({ id })),
+          catchError((error) => of(DeleteReservationFailure({ error: error.message })))
         )
       )
     )

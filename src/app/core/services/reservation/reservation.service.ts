@@ -1,63 +1,51 @@
-import {Injectable, inject} from '@angular/core';
-import {Reservation} from './reservation';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Observable, catchError, tap, throwError} from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Reservation } from './reservation';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReservationService {
-
-  private reservations: Reservation[] = [];
-  private apiUrl = "http://localhost:3000";
+  private readonly apiUrl = environment.apiUrl;
   private http = inject(HttpClient);
 
-  // constructor() {
-  //   let savedReservations = localStorage.getItem('reservations');
-  //   this.reservations = savedReservations ? JSON.parse(savedReservations) : [];
-  // }
-  //CRUD
-
   getReservations(): Observable<Reservation[]> {
-    // return this.reservations;
-    return this.http.get<Reservation[]>(`${this.apiUrl}/reservations`).pipe(
-      tap(response => console.log('Raw API Response:', response)),
-      catchError(this.handleError)
-    );
+    return this.http
+      .get<Reservation[]>(`${this.apiUrl}/reservations`)
+      .pipe(catchError(this.handleError));
   }
 
-  getReservation(id: string): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.apiUrl}/reservations/${id}`).pipe(
-      catchError(this.handleError)
-    );
-    // return this.reservations.find(r => r.id === id);
+  getReservation(id: string): Observable<Reservation> {
+    return this.http
+      .get<Reservation>(`${this.apiUrl}/reservations/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
-  addReservation(reservation: Reservation): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/reservations`, reservation);
+  addReservation(reservation: Reservation): Observable<Reservation> {
+    return this.http
+      .post<Reservation>(`${this.apiUrl}/reservations`, reservation)
+      .pipe(catchError(this.handleError));
+  }
+
+  updateReservation(id: string, reservation: Reservation): Observable<void> {
+    return this.http
+      .put<void>(`${this.apiUrl}/reservations/${id}`, reservation)
+      .pipe(catchError(this.handleError));
   }
 
   deleteReservation(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/reservations/${id}`);
+    return this.http
+      .delete<void>(`${this.apiUrl}/reservations/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
-  updateReservation(id: string, updateReservation: Reservation): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/reservations/${id}`, updateReservation);
-    // localStorage.setItem('reservations', JSON.stringify(this.reservations));
-
-  }
-
-  // Error handling
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An error occurred';
-    if (error.error instanceof ErrorEvent) {
-      // Client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Backend error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.error(errorMessage);
-    return throwError(() => errorMessage);
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    const message =
+      error.error instanceof ErrorEvent
+        ? error.error.message
+        : `Error ${error.status}: ${error.message}`;
+    return throwError(() => new Error(message));
   }
 }
